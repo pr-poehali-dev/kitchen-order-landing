@@ -111,14 +111,7 @@ export default function Index() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-montserrat font-bold mb-6 text-charcoal">
             Кухни вашей
-            <span className="text-soft-black block mb-6">мечты</span>
-            <div className="flex justify-center">
-              <img 
-                src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
-                alt="VOODI Logo" 
-                className="h-16 w-auto"
-              />
-            </div>
+            <span className="text-soft-black block">мечты</span>
           </h1>
           <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
             Создаём уникальные кухни под заказ с современным дизайном и премиальными материалами. 
