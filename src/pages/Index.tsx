@@ -288,14 +288,14 @@ export default function Index() {
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Shield" size={40} className="text-primary" />
               </div>
-              <h3 className="text-xl font-montserrat font-semibold mb-2">5 лет гарантии</h3>
+              <h3 className="text-xl font-montserrat font-semibold mb-2">12 месяцев гарантии</h3>
               <p className="text-gray-600">На всю мебель и фурнитуру</p>
             </div>
             <div className="text-center animate-on-scroll opacity-0" style={{animationDelay: '100ms'}}>
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Clock" size={40} className="text-primary" />
               </div>
-              <h3 className="text-xl font-montserrat font-semibold mb-2">30 дней</h3>
+              <h3 className="text-xl font-montserrat font-semibold mb-2">от 14 дней</h3>
               <p className="text-gray-600">Срок изготовления</p>
             </div>
             <div className="text-center animate-on-scroll opacity-0" style={{animationDelay: '200ms'}}>
@@ -309,7 +309,7 @@ export default function Index() {
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Users" size={40} className="text-primary" />
               </div>
-              <h3 className="text-xl font-montserrat font-semibold mb-2">15 лет</h3>
+              <h3 className="text-xl font-montserrat font-semibold mb-2">10 лет</h3>
               <p className="text-gray-600">Опыта на рынке</p>
             </div>
           </div>
