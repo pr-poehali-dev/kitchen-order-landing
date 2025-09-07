@@ -191,13 +191,13 @@ export default function Index() {
             
             {/* Navigation buttons */}
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 0 ? 7 : prev - 1))
+              onClick={() => setCurrentSlide(prev => prev === 0 ? 7 : prev - 1)}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronLeft" size={24} />
             </button>
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 7 ? 0 : prev + 1))
+              onClick={() => setCurrentSlide(prev => prev === 7 ? 0 : prev + 1)}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronRight" size={24} />
