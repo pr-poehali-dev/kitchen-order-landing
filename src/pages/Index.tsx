@@ -42,9 +42,9 @@ export default function Index() {
       description: "Минимализм с мраморными столешницами"
     },
     {
-      title: "Тёмная кухня с деревом",
-      image: "/img/0736edf1-cee6-4298-927e-c7e8efee0d40.jpg", 
-      description: "Индустриальный стиль с акцентами"
+      title: "Неоклассическая кухня",
+      image: "/img/996514bc-959f-4e8f-ad92-f5b1971200b0.jpg", 
+      description: "Элегантность и изысканность"
     },
     {
       title: "Хай-тек кухня",
