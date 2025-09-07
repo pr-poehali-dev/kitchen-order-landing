@@ -169,7 +169,10 @@ export default function Index() {
                   "https://cdn.poehali.dev/files/341f282c-3db9-4673-8d40-1cc06d4f7679.jpeg",
                   "https://cdn.poehali.dev/files/baaafa22-041a-456d-ba03-d8bc14bbd99b.jpeg",
                   "https://cdn.poehali.dev/files/f2f29bce-6f22-42ea-ba1e-ec07e3db2d2e.jpeg",
-                  "https://cdn.poehali.dev/files/4b27c2a1-9a8b-40a9-a68a-88709b9c4f15.jpeg"
+                  "https://cdn.poehali.dev/files/4b27c2a1-9a8b-40a9-a68a-88709b9c4f15.jpeg",
+                  "https://cdn.poehali.dev/files/0aa63d4d-9af5-4137-ba93-e9ef18f7b000.jpeg",
+                  "https://cdn.poehali.dev/files/d15d2f85-b6e2-4ac8-ae4a-de033c058616.jpeg",
+                  "https://cdn.poehali.dev/files/53c4a846-d0b7-44b8-a0a1-b706998fa220.jpeg"
                 ].map((image, index) => (
                   <div key={index} className="min-w-full">
                     <img 
@@ -188,13 +191,13 @@ export default function Index() {
             
             {/* Navigation buttons */}
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 0 ? 4 : prev - 1)}
+              onClick={() => setCurrentSlide(prev => prev === 0 ? 7 : prev - 1))
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronLeft" size={24} />
             </button>
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 4 ? 0 : prev + 1)}
+              onClick={() => setCurrentSlide(prev => prev === 7 ? 0 : prev + 1))
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronRight" size={24} />
@@ -202,7 +205,7 @@ export default function Index() {
             
             {/* Dots indicator */}
             <div className="flex justify-center mt-6 space-x-2">
-              {[0, 1, 2, 3, 4].map((index) => (
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
