@@ -122,7 +122,7 @@ export default function Index() {
           </div>
           <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
             Создаём уникальные кухни под заказ с современным дизайном и премиальными материалами. 
-            От проекта до установки за 30 дней.
+            От проекта до установки за 15 дней.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-4 bg-primary hover:bg-primary/90">
