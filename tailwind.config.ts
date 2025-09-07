@@ -23,6 +23,10 @@ export default {
 				'open-sans': ['Open Sans', 'sans-serif'],
 			},
 			colors: {
+				'pastel-blue': '#E5F3FF',
+				'pastel-gray': '#F5F7FA',
+				'charcoal': '#2D3748',
+				'soft-black': '#1A202C',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

@@ -72,13 +72,13 @@ export default function Index() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-white py-20">
+      <section className="bg-gradient-to-br from-pastel-gray to-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-montserrat font-bold mb-6 text-gray-900">
+          <h1 className="text-5xl md:text-6xl font-montserrat font-bold mb-6 text-charcoal">
             Кухни вашей
-            <span className="text-primary block">мечты</span>
+            <span className="text-soft-black block">мечты</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
             Создаём уникальные кухни под заказ с современным дизайном и премиальными материалами. 
             От проекта до установки за 30 дней.
           </p>
@@ -124,7 +124,7 @@ export default function Index() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-20 bg-gray-50">
+      <section id="services" className="py-20 bg-pastel-gray">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наши услуги</h2>
@@ -149,7 +149,7 @@ export default function Index() {
 
 
       {/* Prices */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-pastel-blue">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наши цены</h2>
@@ -277,7 +277,7 @@ export default function Index() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 bg-gray-900 text-white">
+      <section id="contact" className="py-20 bg-soft-black text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold mb-4">Свяжитесь с нами</h2>
@@ -306,18 +306,18 @@ export default function Index() {
               </div>
             </div>
             <div>
-              <Card className="bg-gray-800 border-gray-700">
+              <Card className="bg-charcoal border-gray-600">
                 <CardHeader>
                   <CardTitle className="text-white font-montserrat">Заказать звонок</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor="name" className="text-gray-300">Ваше имя</Label>
-                    <Input id="name" className="bg-gray-700 border-gray-600 text-white" />
+                    <Input id="name" className="bg-gray-600 border-gray-500 text-white" />
                   </div>
                   <div>
                     <Label htmlFor="phone" className="text-gray-300">Телефон</Label>
-                    <Input id="phone" className="bg-gray-700 border-gray-600 text-white" />
+                    <Input id="phone" className="bg-gray-600 border-gray-500 text-white" />
                   </div>
                   <Button className="w-full bg-primary hover:bg-primary/90">
                     Заказать звонок
@@ -330,7 +330,7 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-950 text-white py-8">
+      <footer className="bg-black text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <div className="text-2xl font-montserrat font-bold text-primary mb-4">КУХНИ НА ЗАКАЗ</div>
           <p className="text-gray-400">© 2024 Все права защищены</p>
