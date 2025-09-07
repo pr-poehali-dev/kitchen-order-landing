@@ -47,9 +47,9 @@ export default function Index() {
       description: "Индустриальный стиль с акцентами"
     },
     {
-      title: "Скандинавская кухня",
-      image: "/img/dd4ff85c-08b3-480c-9ce8-72fd5252e110.jpg",
-      description: "Светлое дерево и уют"
+      title: "Хай-тек кухня",
+      image: "/img/dedade47-4955-49ef-80fa-d822ec7deb3c.jpg",
+      description: "Технологии и современный дизайн"
     }
   ];
 
