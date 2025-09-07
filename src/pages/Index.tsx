@@ -133,11 +133,13 @@ export default function Index() {
       >
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-montserrat font-bold mb-6 text-white">
-            Кухня на заказ
+            Современные кухни на заказ
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Создаём уникальные кухни под заказ с современным дизайном и премиальными материалами. 
-            От проекта до установки за 15 дней.
+            Ваша идеальная кухня — уже в шаге от реальности! Забудьте о шаблонах и компромиссах. Проектируются, изготавливаются и устанавливаются «под ключ» — вы только наслаждаетесь результатом.
+          </p>
+          <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto font-medium">
+            Пора заказать кухню, которая создана именно для вас
           </p>
           <div className="flex justify-center">
             <Button size="lg" className="text-lg px-8 py-4 bg-primary hover:bg-primary/90">
