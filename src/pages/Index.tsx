@@ -107,7 +107,7 @@ export default function Index() {
                 className="h-8 w-auto"
               />
               <div className="text-2xl font-montserrat font-bold text-primary">
-                КУХНИ НА ЗАКАЗ
+                ВудиМебель
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
