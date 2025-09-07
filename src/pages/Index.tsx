@@ -165,12 +165,11 @@ export default function Index() {
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {[
-                  "https://cdn.poehali.dev/files/b2504485-132d-4265-9251-c489061e6339.jpeg",
-                  "https://cdn.poehali.dev/files/50c24e58-864a-489d-8685-698974615f6a.jpeg",
-                  "https://cdn.poehali.dev/files/4fff06f3-90bf-493f-a0ac-895258c4ce22.jpeg",
-                  "https://cdn.poehali.dev/files/f633cb99-6659-45cc-bb21-ddb60cf74c70.jpeg",
-                  "https://cdn.poehali.dev/files/550b829b-e735-4ded-95ae-cf61abecc26b.jpeg",
-                  "https://cdn.poehali.dev/files/7500041f-84e8-4fa8-9718-b6d3325cad64.jpeg"
+                  "https://cdn.poehali.dev/files/fb5fb1d5-6b9b-46f1-a325-6c24a77142a4.jpeg",
+                  "https://cdn.poehali.dev/files/341f282c-3db9-4673-8d40-1cc06d4f7679.jpeg",
+                  "https://cdn.poehali.dev/files/baaafa22-041a-456d-ba03-d8bc14bbd99b.jpeg",
+                  "https://cdn.poehali.dev/files/f2f29bce-6f22-42ea-ba1e-ec07e3db2d2e.jpeg",
+                  "https://cdn.poehali.dev/files/4b27c2a1-9a8b-40a9-a68a-88709b9c4f15.jpeg"
                 ].map((image, index) => (
                   <div key={index} className="min-w-full">
                     <img 
@@ -189,13 +188,13 @@ export default function Index() {
             
             {/* Navigation buttons */}
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 0 ? 5 : prev - 1)}
+              onClick={() => setCurrentSlide(prev => prev === 0 ? 4 : prev - 1))
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronLeft" size={24} />
             </button>
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 5 ? 0 : prev + 1)}
+              onClick={() => setCurrentSlide(prev => prev === 4 ? 0 : prev + 1)}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronRight" size={24} />
@@ -203,7 +202,7 @@ export default function Index() {
             
             {/* Dots indicator */}
             <div className="flex justify-center mt-6 space-x-2">
-              {[0, 1, 2, 3, 4, 5].map((index) => (
+              {[0, 1, 2, 3, 4].map((index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
