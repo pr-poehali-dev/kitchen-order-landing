@@ -56,7 +56,7 @@ export default function Index() {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
               <img 
-                src="https://cdn.poehali.dev/files/e2c29d92-2889-4633-898d-d050fc889875.jpeg" 
+                src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
                 alt="VOODI Logo" 
                 className="h-8 w-auto"
               />
@@ -81,17 +81,17 @@ export default function Index() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-pastel-gray to-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <div className="mb-8">
-            <img 
-              src="https://cdn.poehali.dev/files/e2c29d92-2889-4633-898d-d050fc889875.jpeg" 
-              alt="VOODI Logo" 
-              className="h-20 w-auto mx-auto mb-6"
-            />
-          </div>
           <h1 className="text-5xl md:text-6xl font-montserrat font-bold mb-6 text-charcoal">
             Кухни вашей
             <span className="text-soft-black block">мечты</span>
           </h1>
+          <div className="mb-8">
+            <img 
+              src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
+              alt="VOODI Logo" 
+              className="h-16 w-auto mx-auto"
+            />
+          </div>
           <p className="text-xl text-gray-500 mb-8 max-w-2xl mx-auto">
             Создаём уникальные кухни под заказ с современным дизайном и премиальными материалами. 
             От проекта до установки за 30 дней.
@@ -348,7 +348,7 @@ export default function Index() {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <img 
-              src="https://cdn.poehali.dev/files/e2c29d92-2889-4633-898d-d050fc889875.jpeg" 
+              src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
               alt="VOODI Logo" 
               className="h-8 w-auto"
             />
