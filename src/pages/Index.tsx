@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -6,6 +7,33 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 
 export default function Index() {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach((el) => {
+      if (observerRef.current) {
+        observerRef.current.observe(el);
+      }
+    });
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
 
   const portfolioItems = [
     {
@@ -110,7 +138,7 @@ export default function Index() {
       </section>
 
       {/* Portfolio */}
-      <section id="portfolio" className="py-20 bg-white">
+      <section id="portfolio" className="py-20 bg-white animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наше портфолио</h2>
@@ -118,7 +146,7 @@ export default function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
-              <Card key={index} className="group hover:shadow-2xl transition-all duration-300 overflow-hidden">
+              <Card key={index} className="group hover:shadow-2xl transition-all duration-300 overflow-hidden animate-on-scroll opacity-0" style={{animationDelay: `${index * 200}ms`}}>
                 <div className="relative overflow-hidden">
                   <img 
                     src={item.image} 
@@ -138,7 +166,7 @@ export default function Index() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-20 bg-pastel-gray">
+      <section id="services" className="py-20 bg-pastel-gray animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наши услуги</h2>
@@ -146,7 +174,7 @@ export default function Index() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-white">
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 border-0 bg-white animate-on-scroll opacity-0" style={{animationDelay: `${index * 150}ms`}}>
                 <CardContent className="pt-8">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Icon name={service.icon} size={32} className="text-primary" />
@@ -163,14 +191,14 @@ export default function Index() {
 
 
       {/* Prices */}
-      <section className="py-20 bg-pastel-blue">
+      <section className="py-20 bg-pastel-blue animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наши цены</h2>
             <p className="text-xl text-gray-600">Прозрачная система ценообразования</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="relative">
+            <Card className="relative animate-on-scroll opacity-0" style={{animationDelay: '0ms'}}>
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-montserrat">Эконом</CardTitle>
                 <div className="text-4xl font-bold text-primary font-montserrat">от 25,000₽</div>
@@ -192,7 +220,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative border-primary border-2">
+            <Card className="relative border-primary border-2 animate-on-scroll opacity-0" style={{animationDelay: '200ms'}}>
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <Badge className="bg-primary px-3 py-1">Популярный</Badge>
               </div>
@@ -221,7 +249,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative">
+            <Card className="relative animate-on-scroll opacity-0" style={{animationDelay: '400ms'}}>
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-montserrat">Премиум</CardTitle>
                 <div className="text-4xl font-bold text-primary font-montserrat">от 75,000₽</div>
@@ -251,35 +279,35 @@ export default function Index() {
       </section>
 
       {/* Guarantees */}
-      <section id="guarantees" className="py-20 bg-white">
+      <section id="guarantees" className="py-20 bg-white animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Гарантии качества</h2>
             <p className="text-xl text-gray-600">Мы уверены в качестве нашей работы</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
+            <div className="text-center animate-on-scroll opacity-0" style={{animationDelay: '0ms'}}>
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Shield" size={40} className="text-primary" />
               </div>
               <h3 className="text-xl font-montserrat font-semibold mb-2">5 лет гарантии</h3>
               <p className="text-gray-600">На всю мебель и фурнитуру</p>
             </div>
-            <div className="text-center">
+            <div className="text-center animate-on-scroll opacity-0" style={{animationDelay: '100ms'}}>
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Clock" size={40} className="text-primary" />
               </div>
               <h3 className="text-xl font-montserrat font-semibold mb-2">30 дней</h3>
               <p className="text-gray-600">Срок изготовления</p>
             </div>
-            <div className="text-center">
+            <div className="text-center animate-on-scroll opacity-0" style={{animationDelay: '200ms'}}>
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Award" size={40} className="text-primary" />
               </div>
               <h3 className="text-xl font-montserrat font-semibold mb-2">500+ проектов</h3>
               <p className="text-gray-600">Довольных клиентов</p>
             </div>
-            <div className="text-center">
+            <div className="text-center animate-on-scroll opacity-0" style={{animationDelay: '300ms'}}>
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Icon name="Users" size={40} className="text-primary" />
               </div>
@@ -291,7 +319,7 @@ export default function Index() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 bg-soft-black text-white">
+      <section id="contact" className="py-20 bg-soft-black text-white animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold mb-4">Свяжитесь с нами</h2>
