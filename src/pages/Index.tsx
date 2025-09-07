@@ -117,9 +117,6 @@ export default function Index() {
               <a href="#guarantees" className="text-gray-700 hover:text-primary transition-colors">Гарантии</a>
               <a href="#contact" className="text-gray-700 hover:text-primary transition-colors">Контакты</a>
             </nav>
-            <Button className="bg-primary hover:bg-primary/90">
-              Заказать звонок
-            </Button>
           </div>
         </div>
       </header>
@@ -142,14 +139,10 @@ export default function Index() {
             Создаём уникальные кухни под заказ с современным дизайном и премиальными материалами. 
             От проекта до установки за 15 дней.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Button size="lg" className="text-lg px-8 py-4 bg-primary hover:bg-primary/90">
               <Icon name="Phone" className="mr-2" />
               Заказать проект
-            </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-              <Icon name="Phone" className="mr-2" />
-              Получить консультацию
             </Button>
           </div>
         </div>
