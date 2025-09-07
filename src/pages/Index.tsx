@@ -1,39 +1,11 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Slider } from '@/components/ui/slider';
 import Icon from '@/components/ui/icon';
 
 export default function Index() {
-  const [area, setArea] = useState([10]);
-  const [material, setMaterial] = useState('');
-  const [facade, setFacade] = useState('');
-  const [appliances, setAppliances] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  const calculatePrice = () => {
-    let price = area[0] * 25000; // базовая цена за м²
-    
-    // Материалы столешницы
-    if (material === 'marble') price += 50000;
-    if (material === 'quartz') price += 30000;
-    if (material === 'wood') price += 15000;
-    
-    // Фасады
-    if (facade === 'premium') price += 40000;
-    if (facade === 'standard') price += 20000;
-    
-    // Техника
-    if (appliances === 'premium') price += 200000;
-    if (appliances === 'standard') price += 100000;
-    if (appliances === 'basic') price += 50000;
-    
-    setTotalPrice(price);
-  };
 
   const portfolioItems = [
     {
@@ -88,7 +60,7 @@ export default function Index() {
             <nav className="hidden md:flex space-x-8">
               <a href="#portfolio" className="text-gray-700 hover:text-primary transition-colors">Портфолио</a>
               <a href="#services" className="text-gray-700 hover:text-primary transition-colors">Услуги</a>
-              <a href="#calculator" className="text-gray-700 hover:text-primary transition-colors">Калькулятор</a>
+
               <a href="#guarantees" className="text-gray-700 hover:text-primary transition-colors">Гарантии</a>
               <a href="#contact" className="text-gray-700 hover:text-primary transition-colors">Контакты</a>
             </nav>
@@ -112,8 +84,8 @@ export default function Index() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="text-lg px-8 py-4 bg-primary hover:bg-primary/90">
-              <Icon name="Calculator" className="mr-2" />
-              Рассчитать стоимость
+              <Icon name="Phone" className="mr-2" />
+              Заказать проект
             </Button>
             <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-primary text-primary hover:bg-primary hover:text-white">
               <Icon name="Phone" className="mr-2" />
@@ -174,112 +146,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Calculator */}
-      <section id="calculator" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Калькулятор стоимости</h2>
-            <p className="text-xl text-gray-600">Узнайте примерную стоимость вашей кухни</p>
-          </div>
-          <Card className="max-w-4xl mx-auto">
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <div>
-                    <Label className="text-lg font-montserrat font-medium mb-4 block">
-                      Площадь кухни: {area[0]} м²
-                    </Label>
-                    <Slider
-                      value={area}
-                      onValueChange={setArea}
-                      max={50}
-                      min={5}
-                      step={1}
-                      className="w-full"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label className="text-lg font-montserrat font-medium mb-2 block">
-                      Материал столешницы
-                    </Label>
-                    <Select value={material} onValueChange={setMaterial}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Выберите материал" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="laminate">ЛДСП (+0₽)</SelectItem>
-                        <SelectItem value="wood">Дерево (+15,000₽)</SelectItem>
-                        <SelectItem value="quartz">Кварц (+30,000₽)</SelectItem>
-                        <SelectItem value="marble">Мрамор (+50,000₽)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
 
-                  <div>
-                    <Label className="text-lg font-montserrat font-medium mb-2 block">
-                      Тип фасадов
-                    </Label>
-                    <Select value={facade} onValueChange={setFacade}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Выберите фасады" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="basic">Базовые (+0₽)</SelectItem>
-                        <SelectItem value="standard">Стандарт (+20,000₽)</SelectItem>
-                        <SelectItem value="premium">Премиум (+40,000₽)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label className="text-lg font-montserrat font-medium mb-2 block">
-                      Встраиваемая техника
-                    </Label>
-                    <Select value={appliances} onValueChange={setAppliances}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Выберите технику" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="none">Без техники (+0₽)</SelectItem>
-                        <SelectItem value="basic">Базовый набор (+50,000₽)</SelectItem>
-                        <SelectItem value="standard">Стандарт (+100,000₽)</SelectItem>
-                        <SelectItem value="premium">Премиум (+200,000₽)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="flex flex-col justify-center items-center bg-gray-50 rounded-lg p-8">
-                  <div className="text-center mb-6">
-                    <p className="text-gray-600 mb-2">Примерная стоимость:</p>
-                    <div className="text-4xl font-montserrat font-bold text-primary mb-4">
-                      {totalPrice.toLocaleString('ru-RU')} ₽
-                    </div>
-                    <Badge variant="secondary">
-                      Базовая цена: {area[0] * 25000} ₽/м²
-                    </Badge>
-                  </div>
-                  
-                  <Button 
-                    onClick={calculatePrice}
-                    size="lg" 
-                    className="w-full mb-4 bg-primary hover:bg-primary/90"
-                  >
-                    <Icon name="Calculator" className="mr-2" />
-                    Рассчитать точную стоимость
-                  </Button>
-                  
-                  <Button variant="outline" size="lg" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
-                    <Icon name="MessageCircle" className="mr-2" />
-                    Получить консультацию
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
 
       {/* Prices */}
       <section className="py-20 bg-gray-50">
