@@ -170,8 +170,7 @@ export default function Index() {
                   "https://cdn.poehali.dev/files/4fff06f3-90bf-493f-a0ac-895258c4ce22.jpeg",
                   "https://cdn.poehali.dev/files/f633cb99-6659-45cc-bb21-ddb60cf74c70.jpeg",
                   "https://cdn.poehali.dev/files/550b829b-e735-4ded-95ae-cf61abecc26b.jpeg",
-                  "https://cdn.poehali.dev/files/7500041f-84e8-4fa8-9718-b6d3325cad64.jpeg",
-                  "https://cdn.poehali.dev/files/5a6154a6-39d1-4509-b593-79350c69758c.jpeg"
+                  "https://cdn.poehali.dev/files/7500041f-84e8-4fa8-9718-b6d3325cad64.jpeg"
                 ].map((image, index) => (
                   <div key={index} className="min-w-full">
                     <img 
@@ -190,13 +189,13 @@ export default function Index() {
             
             {/* Navigation buttons */}
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 0 ? 6 : prev - 1)}
+              onClick={() => setCurrentSlide(prev => prev === 0 ? 5 : prev - 1)}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronLeft" size={24} />
             </button>
             <button 
-              onClick={() => setCurrentSlide(prev => prev === 6 ? 0 : prev + 1)}
+              onClick={() => setCurrentSlide(prev => prev === 5 ? 0 : prev + 1)}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
             >
               <Icon name="ChevronRight" size={24} />
@@ -204,7 +203,7 @@ export default function Index() {
             
             {/* Dots indicator */}
             <div className="flex justify-center mt-6 space-x-2">
-              {[0, 1, 2, 3, 4, 5, 6].map((index) => (
+              {[0, 1, 2, 3, 4, 5].map((index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
