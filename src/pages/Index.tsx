@@ -37,9 +37,9 @@ export default function Index() {
 
   const portfolioItems = [
     {
-      title: "Современная белая кухня",
-      image: "/img/067d759e-6cf9-46db-8f88-162779d4fd66.jpg",
-      description: "Минимализм с мраморными столешницами"
+      title: "Деревянная кухня",
+      image: "/img/9a685fdb-cbab-481c-b20f-737dc790df9b.jpg",
+      description: "Тепло натурального дерева"
     },
     {
       title: "Неоклассическая кухня",
