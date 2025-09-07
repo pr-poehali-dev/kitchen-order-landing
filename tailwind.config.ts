@@ -24,7 +24,7 @@ export default {
 			},
 			colors: {
 				'pastel-blue': '#E5F3FF',
-				'pastel-gray': '#F5F7FA',
+				'pastel-gray': '#EDF2F7',
 				'charcoal': '#2D3748',
 				'soft-black': '#1A202C',
 				border: 'hsl(var(--border))',
