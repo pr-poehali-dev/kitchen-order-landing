@@ -142,7 +142,7 @@ export default function Index() {
             Пора заказать кухню, которая создана именно для вас
           </p>
           <div className="flex justify-center">
-            <Button size="lg" className="text-lg px-8 py-4 bg-primary hover:bg-primary/90">
+            <Button size="lg" className="text-lg px-8 py-4 bg-primary hover:bg-primary/90" onClick={() => setShowModal(true)}>
               <Icon name="Phone" className="mr-2" />
               Заказать проект
             </Button>
