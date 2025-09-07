@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,9 @@ import Icon from '@/components/ui/icon';
 
 export default function Index() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [phone, setPhone] = useState('');
+  const pricesRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -15,6 +18,13 @@ export default function Index() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-fade-in-up');
+            
+            // Показываем модальное окно после просмотра цен
+            if (entry.target.id === 'prices-section') {
+              setTimeout(() => {
+                setShowModal(true);
+              }, 2000);
+            }
           }
         });
       },
@@ -189,7 +199,7 @@ export default function Index() {
 
 
       {/* Prices */}
-      <section className="py-20 bg-pastel-blue animate-on-scroll opacity-0">
+      <section id="prices-section" className="py-20 bg-pastel-blue animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наши цены</h2>
@@ -375,6 +385,58 @@ export default function Index() {
           <p className="text-gray-400">© 2024 Все права защищены</p>
         </div>
       </footer>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 relative">
+            <button 
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <Icon name="X" size={24} />
+            </button>
+            
+            <div className="text-center mb-6">
+              <div className="text-3xl font-montserrat font-bold text-primary mb-2">🎉 АКЦИЯ!</div>
+              <h3 className="text-xl font-montserrat font-semibold mb-2">Бесплатный замер + 3D проект</h3>
+              <p className="text-gray-600">Оставьте свой номер телефона для связи и получите замер + 3D проект бесплатно</p>
+            </div>
+            
+            <form className="space-y-4">
+              <div>
+                <Label htmlFor="modal-phone">Ваш номер телефона</Label>
+                <Input 
+                  id="modal-phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+7 (999) 123-45-67"
+                  className="mt-1"
+                />
+              </div>
+              
+              <Button 
+                className="w-full bg-primary hover:bg-primary/90"
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Здесь можно добавить логику отправки формы
+                  alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+                  setShowModal(false);
+                  setPhone('');
+                }}
+              >
+                <Icon name="Phone" className="mr-2" />
+                Получить бесплатный замер
+              </Button>
+            </form>
+            
+            <p className="text-xs text-gray-500 text-center mt-4">
+              Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
