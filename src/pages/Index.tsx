@@ -54,8 +54,15 @@ export default function Index() {
       <header className="border-b bg-white/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-montserrat font-bold text-primary">
-              КУХНИ НА ЗАКАЗ
+            <div className="flex items-center space-x-3">
+              <img 
+                src="https://cdn.poehali.dev/files/e2c29d92-2889-4633-898d-d050fc889875.jpeg" 
+                alt="VOODI Logo" 
+                className="h-8 w-auto"
+              />
+              <div className="text-2xl font-montserrat font-bold text-primary">
+                КУХНИ НА ЗАКАЗ
+              </div>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#portfolio" className="text-gray-700 hover:text-primary transition-colors">Портфолио</a>
@@ -74,6 +81,13 @@ export default function Index() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-pastel-gray to-white py-20">
         <div className="container mx-auto px-4 text-center">
+          <div className="mb-8">
+            <img 
+              src="https://cdn.poehali.dev/files/e2c29d92-2889-4633-898d-d050fc889875.jpeg" 
+              alt="VOODI Logo" 
+              className="h-20 w-auto mx-auto mb-6"
+            />
+          </div>
           <h1 className="text-5xl md:text-6xl font-montserrat font-bold mb-6 text-charcoal">
             Кухни вашей
             <span className="text-soft-black block">мечты</span>
@@ -332,7 +346,14 @@ export default function Index() {
       {/* Footer */}
       <footer className="bg-black text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <div className="text-2xl font-montserrat font-bold text-primary mb-4">КУХНИ НА ЗАКАЗ</div>
+          <div className="flex items-center justify-center space-x-3 mb-4">
+            <img 
+              src="https://cdn.poehali.dev/files/e2c29d92-2889-4633-898d-d050fc889875.jpeg" 
+              alt="VOODI Logo" 
+              className="h-8 w-auto"
+            />
+            <div className="text-2xl font-montserrat font-bold text-primary">КУХНИ НА ЗАКАЗ</div>
+          </div>
           <p className="text-gray-400">© 2024 Все права защищены</p>
         </div>
       </footer>
