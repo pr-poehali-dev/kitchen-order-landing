@@ -199,8 +199,8 @@ export default function Index() {
             <Card className="relative animate-on-scroll opacity-0" style={{animationDelay: '0ms'}}>
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-montserrat">Эконом</CardTitle>
-                <div className="text-4xl font-bold text-primary font-montserrat">от 25,000₽</div>
-                <p className="text-gray-600">за м²</p>
+                <div className="text-4xl font-bold text-primary font-montserrat">от 15,000₽</div>
+                <p className="text-gray-600">за м/пгн</p>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center space-x-2">
@@ -224,8 +224,8 @@ export default function Index() {
               </div>
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-montserrat">Комфорт</CardTitle>
-                <div className="text-4xl font-bold text-primary font-montserrat">от 45,000₽</div>
-                <p className="text-gray-600">за м²</p>
+                <div className="text-4xl font-bold text-primary font-montserrat">от 25,000₽</div>
+                <p className="text-gray-600">за м/пгн</p>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center space-x-2">
@@ -250,8 +250,8 @@ export default function Index() {
             <Card className="relative animate-on-scroll opacity-0" style={{animationDelay: '400ms'}}>
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-montserrat">Премиум</CardTitle>
-                <div className="text-4xl font-bold text-primary font-montserrat">от 75,000₽</div>
-                <p className="text-gray-600">за м²</p>
+                <div className="text-4xl font-bold text-primary font-montserrat">от 45,000₽</div>
+                <p className="text-gray-600">за м/пгн</p>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center space-x-2">
