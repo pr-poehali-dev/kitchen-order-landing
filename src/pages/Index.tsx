@@ -329,15 +329,7 @@ export default function Index() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Icon name="Phone" className="text-primary" />
-                  <span>+7 (495) 123-45-67</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Icon name="Mail" className="text-primary" />
-                  <span>info@kitchen-design.ru</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Icon name="MapPin" className="text-primary" />
-                  <span>Москва, ул. Дизайнерская, д. 15</span>
+                  <span>+7 993 252‑14‑75</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Icon name="Clock" className="text-primary" />
