@@ -10,6 +10,7 @@ export default function Index() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [phone, setPhone] = useState('');
+  const [currentSlide, setCurrentSlide] = useState(0);
   const pricesRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -149,26 +150,62 @@ export default function Index() {
       <section id="portfolio" className="py-20 bg-white animate-on-scroll opacity-0">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наше портфолио</h2>
-            <p className="text-xl text-gray-600">Более 500 реализованных проектов</p>
+            <h2 className="text-4xl font-montserrat font-bold mb-6">Наши работы</h2>
+            <p className="text-xl text-gray-600">Посмотрите на реализованные проекты</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {portfolioItems.map((item, index) => (
-              <Card key={index} className="group hover:shadow-2xl transition-all duration-300 overflow-hidden animate-on-scroll opacity-0" style={{animationDelay: `${index * 200}ms`}}>
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <CardHeader>
-                  <CardTitle className="font-montserrat">{item.title}</CardTitle>
-                  <p className="text-gray-600">{item.description}</p>
-                </CardHeader>
-              </Card>
-            ))}
+          
+          <div className="relative max-w-5xl mx-auto">
+            <div className="overflow-hidden rounded-xl">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {[
+                  "https://cdn.poehali.dev/files/4fff06f3-90bf-493f-a0ac-895258c4ce22.jpeg",
+                  "https://cdn.poehali.dev/files/f633cb99-6659-45cc-bb21-ddb60cf74c70.jpeg",
+                  "https://cdn.poehali.dev/files/550b829b-e735-4ded-95ae-cf61abecc26b.jpeg",
+                  "https://cdn.poehali.dev/files/7500041f-84e8-4fa8-9718-b6d3325cad64.jpeg",
+                  "https://cdn.poehali.dev/files/5a6154a6-39d1-4509-b593-79350c69758c.jpeg"
+                ].map((image, index) => (
+                  <div key={index} className="min-w-full">
+                    <img 
+                      src={image} 
+                      alt={`Проект ${index + 1}`}
+                      className="w-full aspect-[4/3] object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Navigation buttons */}
+            <button 
+              onClick={() => setCurrentSlide(prev => prev === 0 ? 4 : prev - 1)}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
+            >
+              <Icon name="ChevronLeft" size={24} />
+            </button>
+            <button 
+              onClick={() => setCurrentSlide(prev => prev === 4 ? 0 : prev + 1)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all"
+            >
+              <Icon name="ChevronRight" size={24} />
+            </button>
+            
+            {/* Dots indicator */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {[0, 1, 2, 3, 4].map((index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    currentSlide === index 
+                      ? 'bg-primary scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
