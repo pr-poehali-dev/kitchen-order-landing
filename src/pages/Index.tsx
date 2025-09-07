@@ -50,6 +50,11 @@ export default function Index() {
       title: "Хай-тек кухня",
       image: "/img/dedade47-4955-49ef-80fa-d822ec7deb3c.jpg",
       description: "Технологии и современный дизайн"
+    },
+    {
+      title: "Современная белая кухня",
+      image: "/img/a57ce2af-c0dd-4a0e-b14a-ea9dc90a155a.jpg",
+      description: "Минимализм с мраморными столешницами"
     }
   ];
 
@@ -137,7 +142,7 @@ export default function Index() {
             <h2 className="text-4xl font-montserrat font-bold text-gray-900 mb-4">Наше портфолио</h2>
             <p className="text-xl text-gray-600">Более 500 реализованных проектов</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {portfolioItems.map((item, index) => (
               <Card key={index} className="group hover:shadow-2xl transition-all duration-300 overflow-hidden animate-on-scroll opacity-0" style={{animationDelay: `${index * 200}ms`}}>
                 <div className="relative overflow-hidden">
