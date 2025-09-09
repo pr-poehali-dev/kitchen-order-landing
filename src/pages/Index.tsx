@@ -5,8 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
-import emailjs from 'emailjs-com';
-import { EMAIL_CONFIG } from '@/config/email';
+import { GOOGLE_FORMS_CONFIG } from '@/config/google-forms';
 
 export default function Index() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -19,26 +18,21 @@ export default function Index() {
   const [submitMessage, setSubmitMessage] = useState('');
   const pricesRef = useRef<HTMLElement>(null);
 
-  const sendEmail = async (phoneNumber: string) => {
+  const sendToGoogleForms = async (phoneNumber: string) => {
     try {
       setIsSubmitting(true);
       
-      const templateParams = {
-        phone_number: phoneNumber,
-        from_name: 'Сайт кухни на заказ',
-        message: `Новая заявка на замер кухни. Телефон: ${phoneNumber}`,
-        current_time: new Date().toLocaleString('ru-RU'),
-        to_email: EMAIL_CONFIG.RECIPIENT_EMAIL
-      };
+      // Создаем FormData для отправки в Google Forms
+      const formData = new FormData();
+      formData.append(GOOGLE_FORMS_CONFIG.PHONE_FIELD, phoneNumber);
+      formData.append(GOOGLE_FORMS_CONFIG.MESSAGE_FIELD, `Заявка на замер кухни. Время: ${new Date().toLocaleString('ru-RU')}`);
       
-      console.log('Отправляю данные:', {
-        serviceId: EMAIL_CONFIG.SERVICE_ID,
-        templateId: EMAIL_CONFIG.TEMPLATE_ID,
-        userId: EMAIL_CONFIG.USER_ID,
-        params: templateParams
+      // Отправляем данные в Google Forms
+      await fetch(GOOGLE_FORMS_CONFIG.FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Важно для Google Forms
+        body: formData
       });
-      
-      await emailjs.send(EMAIL_CONFIG.SERVICE_ID, EMAIL_CONFIG.TEMPLATE_ID, templateParams, EMAIL_CONFIG.USER_ID);
       
       setSubmitMessage('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
       setPhone('');
@@ -50,8 +44,7 @@ export default function Index() {
       
     } catch (error) {
       console.error('Ошибка отправки:', error);
-      const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
-      setSubmitMessage(`❌ Ошибка: ${errorMessage}`);
+      setSubmitMessage('❌ Произошла ошибка. Попробуйте еще раз или позвоните нам.');
     } finally {
       setIsSubmitting(false);
     }
@@ -536,7 +529,7 @@ export default function Index() {
                 onClick={(e) => {
                   e.preventDefault();
                   if (phone.trim()) {
-                    sendEmail(phone.trim());
+                    sendToGoogleForms(phone.trim());
                   }
                 }}
               >
