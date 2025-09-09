@@ -18,35 +18,20 @@ export default function Index() {
   const [submitMessage, setSubmitMessage] = useState('');
   const pricesRef = useRef<HTMLElement>(null);
 
-  const sendToGoogleForms = async (phoneNumber: string) => {
-    try {
-      setIsSubmitting(true);
-      
-      // Простое решение - показываем номер и просим связаться
-      setSubmitMessage('✅ Заявка принята! Мы свяжемся с вами в ближайшее время.');
-      setPhone('');
-      
-      // Логируем заявку для администратора
-      console.log('🔥 НОВАЯ ЗАЯВКА:', {
-        телефон: phoneNumber,
-        время: new Date().toLocaleString('ru-RU'),
-        страница: 'Сайт кухонь'
-      });
-      
-      // Можно добавить отправку в Telegram bot или email
-      // TODO: Настроить реальную отправку заявок
-      
-      setTimeout(() => {
-        setShowModal(false);
-        setSubmitMessage('');
-      }, 3000);
-      
-    } catch (error) {
-      console.error('Ошибка:', error);
-      setSubmitMessage('❌ Произошла ошибка. Попробуйте еще раз или позвоните нам.');
-    } finally {
+  const sendToGoogleForms = (phoneNumber: string) => {
+    setIsSubmitting(true);
+    
+    // Простая заявка без внешних запросов
+    console.log('🔥 НОВАЯ ЗАЯВКА:', phoneNumber, new Date().toLocaleString('ru-RU'));
+    
+    setSubmitMessage('✅ Заявка принята! Мы свяжемся с вами в ближайшее время.');
+    setPhone('');
+    
+    setTimeout(() => {
+      setShowModal(false);
+      setSubmitMessage('');
       setIsSubmitting(false);
-    }
+    }, 3000);
   };
 
   useEffect(() => {
