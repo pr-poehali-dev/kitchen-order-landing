@@ -8,8 +8,8 @@ export const EMAIL_CONFIG = {
   RECIPIENT_EMAIL: 'your-email@example.com' // Замените на вашу почту
 };
 
-// Инструкция по настройке:
-// 1. Зарегистрируйтесь на https://www.emailjs.com/
-// 2. Создайте новый сервис (Gmail, Outlook и т.д.)
-// 3. Создайте шаблон письма с переменными: {{phone_number}}, {{from_name}}, {{message}}
-// 4. Замените значения выше на реальные из вашего аккаунта EmailJS
+// Пример заполнения после настройки EmailJS:
+// SERVICE_ID: 'service_abc123' - из раздела Services
+// TEMPLATE_ID: 'template_xyz789' - из раздела Email Templates  
+// USER_ID: 'user_def456' - из раздела Account → General
+// RECIPIENT_EMAIL: 'manager@kitchen-company.ru' - ваша реальная почта
