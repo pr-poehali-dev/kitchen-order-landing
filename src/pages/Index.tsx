@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import emailjs from 'emailjs-com';
+import { EMAIL_CONFIG } from '@/config/email';
 
 export default function Index() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -22,19 +23,15 @@ export default function Index() {
     try {
       setIsSubmitting(true);
       
-      // Замените эти значения на ваши из EmailJS
-      const serviceId = 'YOUR_SERVICE_ID';
-      const templateId = 'YOUR_TEMPLATE_ID';
-      const userId = 'YOUR_USER_ID';
-      
       const templateParams = {
         phone_number: phoneNumber,
         from_name: 'Сайт кухни на заказ',
         message: `Новая заявка на замер кухни. Телефон: ${phoneNumber}`,
-        to_email: 'your-email@example.com'
+        current_time: new Date().toLocaleString('ru-RU'),
+        to_email: EMAIL_CONFIG.RECIPIENT_EMAIL
       };
       
-      await emailjs.send(serviceId, templateId, templateParams, userId);
+      await emailjs.send(EMAIL_CONFIG.SERVICE_ID, EMAIL_CONFIG.TEMPLATE_ID, templateParams, EMAIL_CONFIG.USER_ID);
       
       setSubmitMessage('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
       setPhone('');
