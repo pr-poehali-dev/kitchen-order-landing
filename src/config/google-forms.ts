@@ -5,9 +5,9 @@ export const GOOGLE_FORMS_CONFIG = {
   // URL для отправки данных в Google Forms (изменен viewform на formResponse)
   FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSeKyvmyrJt6PtjUoohPy9ZN7Wh9qhnVyuA916pJCQNmZavSFw/formResponse',
   
-  // Замените на entry ID полей в вашей форме
-  PHONE_FIELD: 'entry.123456789', // ID поля для телефона
-  MESSAGE_FIELD: 'entry.987654321' // ID поля для сообщения (опционально)
+  // Попробуем стандартные entry ID (будем тестировать)
+  PHONE_FIELD: 'entry.1045781291', // Первое поле (телефон)
+  MESSAGE_FIELD: 'entry.839337160' // Второе поле (сообщение)
 };
 
 // Инструкция по настройке:
