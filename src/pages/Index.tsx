@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import emailjs from 'emailjs-com';
 
 export default function Index() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -13,7 +14,43 @@ export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
   const pricesRef = useRef<HTMLElement>(null);
+
+  const sendEmail = async (phoneNumber: string) => {
+    try {
+      setIsSubmitting(true);
+      
+      // Замените эти значения на ваши из EmailJS
+      const serviceId = 'YOUR_SERVICE_ID';
+      const templateId = 'YOUR_TEMPLATE_ID';
+      const userId = 'YOUR_USER_ID';
+      
+      const templateParams = {
+        phone_number: phoneNumber,
+        from_name: 'Сайт кухни на заказ',
+        message: `Новая заявка на замер кухни. Телефон: ${phoneNumber}`,
+        to_email: 'your-email@example.com'
+      };
+      
+      await emailjs.send(serviceId, templateId, templateParams, userId);
+      
+      setSubmitMessage('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+      setPhone('');
+      
+      setTimeout(() => {
+        setShowModal(false);
+        setSubmitMessage('');
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Ошибка отправки:', error);
+      setSubmitMessage('❌ Произошла ошибка. Попробуйте еще раз или позвоните нам.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -490,18 +527,33 @@ export default function Index() {
               
               <Button 
                 className="w-full bg-primary hover:bg-primary/90"
+                disabled={isSubmitting || !phone.trim()}
                 onClick={(e) => {
                   e.preventDefault();
-                  // Здесь можно добавить логику отправки формы
-                  alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
-                  setShowModal(false);
-                  setPhone('');
+                  if (phone.trim()) {
+                    sendEmail(phone.trim());
+                  }
                 }}
               >
-                <Icon name="Phone" className="mr-2" />
-                Получить бесплатный замер
+                {isSubmitting ? (
+                  <>
+                    <Icon name="Loader2" className="mr-2 animate-spin" />
+                    Отправляем...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="Phone" className="mr-2" />
+                    Получить бесплатный замер
+                  </>
+                )}
               </Button>
             </form>
+            
+            {submitMessage && (
+              <div className="mt-4 p-3 rounded-lg text-sm text-center bg-gray-50">
+                {submitMessage}
+              </div>
+            )}
             
             <p className="text-xs text-gray-500 text-center mt-4">
               Нажимая кнопку, вы соглашаетесь на обработку персональных данных
