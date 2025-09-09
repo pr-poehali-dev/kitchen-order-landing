@@ -2,7 +2,7 @@
 // Создайте Google Form и замените URL ниже
 
 export const GOOGLE_FORMS_CONFIG = {
-  // URL для отправки данных в Google Forms
+  // URL для отправки данных в Google Forms (изменен viewform на formResponse)
   FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSeKyvmyrJt6PtjUoohPy9ZN7Wh9qhnVyuA916pJCQNmZavSFw/formResponse',
   
   // Замените на entry ID полей в вашей форме
