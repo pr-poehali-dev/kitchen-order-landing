@@ -2,8 +2,8 @@
 // Создайте Google Form и замените URL ниже
 
 export const GOOGLE_FORMS_CONFIG = {
-  // Замените на URL вашей Google Forms (после создания формы)
-  FORM_URL: 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse',
+  // URL для отправки данных в Google Forms
+  FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSeKyvmyrJt6PtjUoohPy9ZN7Wh9qhnVyuA916pJCQNmZavSFw/formResponse',
   
   // Замените на entry ID полей в вашей форме
   PHONE_FIELD: 'entry.123456789', // ID поля для телефона
