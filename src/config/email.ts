@@ -4,7 +4,7 @@
 export const EMAIL_CONFIG = {
   SERVICE_ID: 'service_b7xlx5m', // Замените на ваш Service ID
   TEMPLATE_ID: 'template_ownkf28', // Замените на ваш Template ID  
-  USER_ID: 'YOUR_USER_ID', // Замените на ваш User ID
+  USER_ID: '7V73_AFabup8NT_', // Замените на ваш User ID
   RECIPIENT_EMAIL: 'olegblack93@gmail.com' // Замените на вашу почту
 };
 
