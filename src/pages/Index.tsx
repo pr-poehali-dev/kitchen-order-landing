@@ -31,6 +31,13 @@ export default function Index() {
         to_email: EMAIL_CONFIG.RECIPIENT_EMAIL
       };
       
+      console.log('Отправляю данные:', {
+        serviceId: EMAIL_CONFIG.SERVICE_ID,
+        templateId: EMAIL_CONFIG.TEMPLATE_ID,
+        userId: EMAIL_CONFIG.USER_ID,
+        params: templateParams
+      });
+      
       await emailjs.send(EMAIL_CONFIG.SERVICE_ID, EMAIL_CONFIG.TEMPLATE_ID, templateParams, EMAIL_CONFIG.USER_ID);
       
       setSubmitMessage('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
