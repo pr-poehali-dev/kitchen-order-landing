@@ -43,8 +43,8 @@ export default function Index() {
       
     } catch (error) {
       console.error('Ошибка отправки:', error);
-      console.error('Детали ошибки:', JSON.stringify(error, null, 2));
-      setSubmitMessage(`❌ Ошибка: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}. Попробуйте еще раз.`);
+      const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);
+      setSubmitMessage(`❌ Ошибка: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);
     }
