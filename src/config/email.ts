@@ -2,7 +2,7 @@
 // Получите эти данные на https://www.emailjs.com/
 
 export const EMAIL_CONFIG = {
-  SERVICE_ID: 'YOUR_SERVICE_ID', // Замените на ваш Service ID
+  SERVICE_ID: 'service_b7xlx5m', // Замените на ваш Service ID
   TEMPLATE_ID: 'YOUR_TEMPLATE_ID', // Замените на ваш Template ID  
   USER_ID: 'YOUR_USER_ID', // Замените на ваш User ID
   RECIPIENT_EMAIL: 'your-email@example.com' // Замените на вашу почту
