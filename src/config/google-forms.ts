@@ -2,12 +2,12 @@
 // Создайте Google Form и замените URL ниже
 
 export const GOOGLE_FORMS_CONFIG = {
-  // URL для отправки данных в Google Forms (изменен viewform на formResponse)
-  FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSeKyvmyrJt6PtjUoohPy9ZN7Wh9qhnVyuA916pJCQNmZavSFw/formResponse',
+  // URL для отправки данных в Google Forms (новая форма)
+  FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLScGynP0ngq01VWZc4vsKfRmPGxX_EmWCEAFi8PtFYYwTMPUmw/formResponse',
   
-  // Попробуем стандартные entry ID (будем тестировать)
-  PHONE_FIELD: 'entry.1045781291', // Первое поле (телефон)
-  MESSAGE_FIELD: 'entry.839337160' // Второе поле (сообщение)
+  // Попробуем самые частые entry ID для Google Forms
+  PHONE_FIELD: 'entry.2005620554', // Поле для телефона
+  MESSAGE_FIELD: 'entry.1166974658' // Поле для сообщения
 };
 
 // Инструкция по настройке:
