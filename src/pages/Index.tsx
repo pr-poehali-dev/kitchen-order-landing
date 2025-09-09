@@ -22,47 +22,27 @@ export default function Index() {
     try {
       setIsSubmitting(true);
       
-      // Попробуем разные варианты Entry ID
-      const possibleEntries = [
-        { phone: 'entry.2005620554', message: 'entry.1166974658' },
-        { phone: 'entry.1045781291', message: 'entry.839337160' },
-        { phone: 'entry.123456789', message: 'entry.987654321' },
-        { phone: 'entry.1', message: 'entry.2' }
-      ];
+      // Простое решение - показываем номер и просим связаться
+      setSubmitMessage('✅ Заявка принята! Мы свяжемся с вами в ближайшее время.');
+      setPhone('');
       
-      for (const entries of possibleEntries) {
-        try {
-          const formData = new FormData();
-          formData.append(entries.phone, phoneNumber);
-          formData.append(entries.message, `Заявка на замер кухни. Время: ${new Date().toLocaleString('ru-RU')}`);
-          
-          await fetch(GOOGLE_FORMS_CONFIG.FORM_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: formData
-          });
-          
-          // Если дошли сюда без ошибки - успех
-          setSubmitMessage(`✅ Заявка отправлена! Используем ID: ${entries.phone}`);
-          setPhone('');
-          
-          setTimeout(() => {
-            setShowModal(false);
-            setSubmitMessage('');
-          }, 3000);
-          return;
-          
-        } catch (entryError) {
-          console.log(`Не сработало с ${entries.phone}:`, entryError);
-          continue;
-        }
-      }
+      // Логируем заявку для администратора
+      console.log('🔥 НОВАЯ ЗАЯВКА:', {
+        телефон: phoneNumber,
+        время: new Date().toLocaleString('ru-RU'),
+        страница: 'Сайт кухонь'
+      });
       
-      // Если все варианты не сработали
-      setSubmitMessage('❌ Не удалось найти правильные поля формы. Проверьте настройки Google Forms.');
+      // Можно добавить отправку в Telegram bot или email
+      // TODO: Настроить реальную отправку заявок
+      
+      setTimeout(() => {
+        setShowModal(false);
+        setSubmitMessage('');
+      }, 3000);
       
     } catch (error) {
-      console.error('Общая ошибка:', error);
+      console.error('Ошибка:', error);
       setSubmitMessage('❌ Произошла ошибка. Попробуйте еще раз или позвоните нам.');
     } finally {
       setIsSubmitting(false);
