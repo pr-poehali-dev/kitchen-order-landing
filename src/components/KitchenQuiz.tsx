@@ -649,7 +649,10 @@ ${answers.map((answer, index) =>
                 ← Назад
               </Button>
               <Button
-                onClick={nextQuestion}
+                onClick={() => {
+                  alert(`Отладка: currentQuestion=${currentQuestion}, selectedGift=${selectedGift}, showContactForm=${showContactForm}`);
+                  nextQuestion();
+                }}
                 disabled={!selectedGift}
                 size="lg"
                 className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
