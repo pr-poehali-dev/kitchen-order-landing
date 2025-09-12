@@ -17,6 +17,7 @@ export default function Index() {
   const [lightboxImage, setLightboxImage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [hasShownModal, setHasShownModal] = useState(false);
   const pricesRef = useRef<HTMLElement>(null);
 
   const sendToGoogleForms = (phoneNumber: string) => {
@@ -42,10 +43,11 @@ export default function Index() {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-fade-in-up');
             
-            // Показываем модальное окно после просмотра цен
-            if (entry.target.id === 'prices-section') {
+            // Показываем модальное окно после блока услуги (только один раз)
+            if (entry.target.id === 'services' && !hasShownModal) {
               setTimeout(() => {
                 setShowModal(true);
+                setHasShownModal(true);
               }, 2000);
             }
           }
