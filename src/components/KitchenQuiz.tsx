@@ -14,6 +14,7 @@ const KitchenQuiz = () => {
   const [selectedLayout, setSelectedLayout] = useState<string>('');
   const [selectedStyle, setSelectedStyle] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<string>('');
+  const [selectedLength, setSelectedLength] = useState<string>('');
 
   const layouts = [
     {
@@ -87,6 +88,52 @@ const KitchenQuiz = () => {
     }
   ];
 
+  const lengthOptions = [
+    {
+      id: '2-3m',
+      name: 'от 2 до 3 метров',
+      description: 'Компактная кухня'
+    },
+    {
+      id: '3-5m',
+      name: 'от 3 до 5 метров',
+      description: 'Средняя кухня'
+    },
+    {
+      id: '5-7m',
+      name: 'от 5 до 7 метров',
+      description: 'Большая кухня'
+    },
+    {
+      id: '7m+',
+      name: '7+ метров',
+      description: 'Очень большая кухня'
+    }
+  ];
+
+  const lengthOptions = [
+    {
+      id: '2-3m',
+      name: 'от 2 до 3 метров',
+      description: 'Компактная кухня'
+    },
+    {
+      id: '3-5m',
+      name: 'от 3 до 5 метров',
+      description: 'Средняя кухня'
+    },
+    {
+      id: '5-7m',
+      name: 'от 5 до 7 метров',
+      description: 'Большая кухня'
+    },
+    {
+      id: '7m+',
+      name: '7+ метров',
+      description: 'Очень большая кухня'
+    }
+  ];
+
   const handleLayoutSelect = (layoutId: string) => {
     setSelectedLayout(layoutId);
     const newAnswer: QuizAnswer = {
@@ -120,6 +167,17 @@ const KitchenQuiz = () => {
     setAnswers(prev => [...prev.filter(a => a.question !== 3), newAnswer]);
   };
 
+  const handleLengthSelect = (lengthId: string) => {
+    setSelectedLength(lengthId);
+    const newAnswer: QuizAnswer = {
+      question: 4,
+      answer: lengthId,
+      value: lengthOptions.find(l => l.id === lengthId)?.name
+    };
+    
+    setAnswers(prev => [...prev.filter(a => a.question !== 4), newAnswer]);
+  };
+
   const nextQuestion = () => {
     if (currentQuestion === 1 && selectedLayout) {
       setCurrentQuestion(2);
@@ -127,6 +185,8 @@ const KitchenQuiz = () => {
       setCurrentQuestion(3);
     } else if (currentQuestion === 3 && selectedProject) {
       setCurrentQuestion(4);
+    } else if (currentQuestion === 4 && selectedLength) {
+      setCurrentQuestion(5);
     }
   };
 
@@ -346,7 +406,67 @@ const KitchenQuiz = () => {
           </div>
         )}
 
-        {currentQuestion > 3 && (
+        {currentQuestion === 4 && (
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Вопрос 4 из 5: Укажите ориентировочную длину кухонного гарнитура
+              </h3>
+              <p className="text-gray-600">
+                Поможет более точно рассчитать стоимость
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
+              {lengthOptions.map((option) => (
+                <Card
+                  key={option.id}
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                    selectedLength === option.id
+                      ? 'ring-2 ring-orange-500 bg-orange-50'
+                      : 'hover:shadow-md'
+                  }`}
+                  onClick={() => handleLengthSelect(option.id)}
+                >
+                  <div className="p-6 text-center">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">
+                      {option.name}
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      {option.description}
+                    </p>
+                    {selectedLength === option.id && (
+                      <div className="mt-3 flex justify-center text-orange-600">
+                        <span className="text-sm font-medium">✓ Выбрано</span>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div className="flex justify-center space-x-4">
+              <Button
+                onClick={prevQuestion}
+                variant="outline"
+                size="lg"
+                className="px-8 py-3 text-lg"
+              >
+                ← Назад
+              </Button>
+              <Button
+                onClick={nextQuestion}
+                disabled={!selectedLength}
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+              >
+                Следующий вопрос →
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {currentQuestion > 4 && (
           <div className="text-center">
             <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg p-8">
               <h3 className="text-xl font-semibold text-gray-800 mb-4">
