@@ -194,7 +194,7 @@ const KitchenQuiz = () => {
 
   const sendToTelegram = async (data: any) => {
     const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Замените на токен вашего бота
-    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'; // Замените на ID чата
+    const TELEGRAM_CHAT_ID = '800581249'; // Chat ID пользователя Oleg
     
     const message = `
 🎯 *Новая заявка с квиза!*
