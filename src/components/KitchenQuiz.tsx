@@ -18,31 +18,25 @@ const KitchenQuiz = () => {
       id: 'straight',
       name: 'Прямая',
       description: 'Кухня вдоль одной стены',
-      image: '/img/ea376148-f8ab-4ba4-9929-85fea3f4265c.jpg'
+      image: 'https://cdn.poehali.dev/files/dae6672f-9acd-4704-a054-e1fadfb4a8cf.jpeg'
     },
     {
       id: 'corner',
       name: 'Угловая',
       description: 'L-образная планировка',
-      image: '/img/113acac4-cba6-490f-9110-685792fe983c.jpg'
+      image: 'https://cdn.poehali.dev/files/00493a3d-2e57-43bf-8c8c-42cad84a8d3b.jpeg'
     },
     {
       id: 'u-shaped',
       name: 'П-образная',
       description: 'Кухня на трёх стенах',
-      image: '/img/8df89da8-d3a5-4f3c-ad43-56fc3a46e946.jpg'
+      image: 'https://cdn.poehali.dev/files/0ef53cbf-930b-46cd-b669-1f316c9e8e4f.jpeg'
     },
     {
       id: 'bar',
       name: 'С барной стойкой',
       description: 'Кухня с барной зоной',
-      image: '/img/35c19f5a-fde6-4bf1-84dd-7ddec4ba249b.jpg'
-    },
-    {
-      id: 'island',
-      name: 'Островная',
-      description: 'С центральным островом',
-      image: '/img/93d63d99-4edc-4ade-9daf-edec3509ac4d.jpg'
+      image: 'https://cdn.poehali.dev/files/6099c05c-a1e8-4949-8331-c7e642f92078.jpeg'
     }
   ];
 
@@ -105,7 +99,7 @@ const KitchenQuiz = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto">
               {layouts.map((layout) => (
                 <Card
                   key={layout.id}
@@ -116,23 +110,20 @@ const KitchenQuiz = () => {
                   }`}
                   onClick={() => handleLayoutSelect(layout.id)}
                 >
-                  <div className="p-4">
-                    <div className="aspect-square bg-gray-100 rounded-lg mb-4 overflow-hidden">
+                  <div className="p-3">
+                    <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
                       <img
                         src={layout.image}
                         alt={`Планировка ${layout.name}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </div>
-                    <h4 className="font-semibold text-lg text-gray-800 mb-2">
+                    <h4 className="font-semibold text-sm text-gray-800 mb-1 text-center">
                       {layout.name}
                     </h4>
-                    <p className="text-gray-600 text-sm">
-                      {layout.description}
-                    </p>
                     {selectedLayout === layout.id && (
-                      <div className="mt-3 flex items-center text-orange-600">
-                        <span className="text-sm font-medium">✓ Выбрано</span>
+                      <div className="flex justify-center text-orange-600">
+                        <span className="text-xs font-medium">✓ Выбрано</span>
                       </div>
                     )}
                   </div>
