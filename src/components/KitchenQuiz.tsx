@@ -192,9 +192,68 @@ const KitchenQuiz = () => {
     setAnswers([...answers.filter(a => a.question !== 5), newAnswer]);
   };
 
-  const handleContactSubmit = () => {
-    console.log('Контактные данные:', contactData);
-    alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+  const sendToTelegram = async (data: any) => {
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Замените на токен вашего бота
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'; // Замените на ID чата
+    
+    const message = `
+🎯 *Новая заявка с квиза!*
+
+👤 *Имя:* ${data.name}
+📱 *Телефон:* ${data.phone}
+📞 *Способ связи:* ${data.contactMethod === 'phone' ? 'Телефон' : 'WhatsApp'}
+
+📋 *Ответы квиза:*
+${answers.map((answer, index) => 
+  `${index + 1}. ${getQuestionText(answer.question)}: ${answer.answer}`
+).join('\n')}
+
+📅 *Дата:* ${new Date().toLocaleString('ru-RU')}
+    `;
+
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      });
+
+      if (response.ok) {
+        return true;
+      } else {
+        throw new Error('Ошибка отправки в Telegram');
+      }
+    } catch (error) {
+      console.error('Ошибка отправки в Telegram:', error);
+      return false;
+    }
+  };
+
+  const getQuestionText = (questionNumber: number): string => {
+    const questions = {
+      1: 'Планировка кухни',
+      2: 'Стиль кухни', 
+      3: 'Тип проекта',
+      4: 'Длина гарнитура',
+      5: 'Подарок (замер + 3D проект)'
+    };
+    return questions[questionNumber] || `Вопрос ${questionNumber}`;
+  };
+
+  const handleContactSubmit = async () => {
+    const success = await sendToTelegram(contactData);
+    
+    if (success) {
+      alert('✅ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+    } else {
+      alert('⚠️ Произошла ошибка при отправке. Попробуйте позвонить нам напрямую.');
+    }
   };
 
   const prevQuestion = () => {
