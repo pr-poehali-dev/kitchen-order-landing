@@ -193,7 +193,9 @@ const KitchenQuiz = () => {
   };
 
   const sendToTelegram = async (data: any) => {
-    // Формируем сообщение для отправки
+    const TELEGRAM_BOT_TOKEN = '8224423916:AAFvsAaVCJvH5WD7_U2w26MIyb3ptODwuQk';
+    const TELEGRAM_CHAT_ID = '800581249';
+    
     const message = `🎯 Новая заявка с квиза!
 
 👤 Имя: ${data.name}
@@ -207,13 +209,28 @@ ${answers.map((answer, index) =>
 
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
-    // Создаем ссылку для отправки в Telegram
-    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.origin)}&text=${encodeURIComponent(message)}`;
-    
-    // Открываем Telegram для отправки
-    window.open(telegramUrl, '_blank');
-    
-    return true;
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message
+        })
+      });
+
+      if (response.ok) {
+        return true;
+      } else {
+        console.error('Ошибка Telegram API:', await response.text());
+        return false;
+      }
+    } catch (error) {
+      console.error('Ошибка отправки в Telegram:', error);
+      return false;
+    }
   };
 
   const getQuestionText = (questionNumber: number): string => {
@@ -254,17 +271,15 @@ ${answers.map((answer, index) =>
 
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
-    // Копируем в буфер обмена
-    try {
-      await navigator.clipboard.writeText(message);
-      alert('✅ Заявка сохранена! Данные скопированы в буфер обмена.\n\nВы можете вставить их в Telegram боту: @Black_Oleg');
-    } catch (error) {
-      alert('✅ Заявка сохранена! Скопируйте данные из консоли браузера (F12).');
-      console.log('📋 ДАННЫЕ ЗАЯВКИ ДЛЯ КОПИРОВАНИЯ:');
-      console.log(message);
-    }
+    // Отправляем в Telegram автоматически
+    const success = await sendToTelegram(contactData);
     
-    await sendToTelegram(contactData);
+    if (success) {
+      alert('✅ Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+    } else {
+      alert('⚠️ Заявка сохранена локально. Возможны проблемы с отправкой в Telegram.');
+      console.log('📋 ДАННЫЕ ЗАЯВКИ:', message);
+    }
   };
 
   const prevQuestion = () => {
