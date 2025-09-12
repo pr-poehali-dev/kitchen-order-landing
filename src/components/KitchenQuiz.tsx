@@ -13,6 +13,7 @@ const KitchenQuiz = () => {
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [selectedLayout, setSelectedLayout] = useState<string>('');
   const [selectedStyle, setSelectedStyle] = useState<string>('');
+  const [selectedProject, setSelectedProject] = useState<string>('');
 
   const layouts = [
     {
@@ -68,6 +69,24 @@ const KitchenQuiz = () => {
     }
   ];
 
+  const projectOptions = [
+    {
+      id: 'yes',
+      name: 'Да',
+      description: 'У меня уже есть готовый проект'
+    },
+    {
+      id: 'no',
+      name: 'Нет',
+      description: 'Нуждаюсь в помощи с разработкой'
+    },
+    {
+      id: 'idea',
+      name: 'Есть идея которую хочу реализовать',
+      description: 'Имею представление о желаемом результате'
+    }
+  ];
+
   const handleLayoutSelect = (layoutId: string) => {
     setSelectedLayout(layoutId);
     const newAnswer: QuizAnswer = {
@@ -90,11 +109,24 @@ const KitchenQuiz = () => {
     setAnswers(prev => [...prev.filter(a => a.question !== 2), newAnswer]);
   };
 
+  const handleProjectSelect = (projectId: string) => {
+    setSelectedProject(projectId);
+    const newAnswer: QuizAnswer = {
+      question: 3,
+      answer: projectId,
+      value: projectOptions.find(p => p.id === projectId)?.name
+    };
+    
+    setAnswers(prev => [...prev.filter(a => a.question !== 3), newAnswer]);
+  };
+
   const nextQuestion = () => {
     if (currentQuestion === 1 && selectedLayout) {
       setCurrentQuestion(2);
     } else if (currentQuestion === 2 && selectedStyle) {
       setCurrentQuestion(3);
+    } else if (currentQuestion === 3 && selectedProject) {
+      setCurrentQuestion(4);
     }
   };
 
@@ -254,7 +286,67 @@ const KitchenQuiz = () => {
           </div>
         )}
 
-        {currentQuestion > 2 && (
+        {currentQuestion === 3 && (
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Вопрос 3 из 5: У вас есть проект кухни?
+              </h3>
+              <p className="text-gray-600">
+                Поможет нам понять, как лучше организовать работу
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+              {projectOptions.map((option) => (
+                <Card
+                  key={option.id}
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                    selectedProject === option.id
+                      ? 'ring-2 ring-orange-500 bg-orange-50'
+                      : 'hover:shadow-md'
+                  }`}
+                  onClick={() => handleProjectSelect(option.id)}
+                >
+                  <div className="p-6 text-center">
+                    <h4 className="font-semibold text-lg text-gray-800 mb-2">
+                      {option.name}
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      {option.description}
+                    </p>
+                    {selectedProject === option.id && (
+                      <div className="mt-3 flex justify-center text-orange-600">
+                        <span className="text-sm font-medium">✓ Выбрано</span>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div className="flex justify-center space-x-4">
+              <Button
+                onClick={prevQuestion}
+                variant="outline"
+                size="lg"
+                className="px-8 py-3 text-lg"
+              >
+                ← Назад
+              </Button>
+              <Button
+                onClick={nextQuestion}
+                disabled={!selectedProject}
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+              >
+                Следующий вопрос →
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {currentQuestion > 3 && (
           <div className="text-center">
             <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg p-8">
               <h3 className="text-xl font-semibold text-gray-800 mb-4">
