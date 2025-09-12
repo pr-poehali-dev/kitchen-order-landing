@@ -650,8 +650,8 @@ ${answers.map((answer, index) =>
               </Button>
               <Button
                 onClick={() => {
-                  alert(`Отладка: currentQuestion=${currentQuestion}, selectedGift=${selectedGift}, showContactForm=${showContactForm}`);
-                  nextQuestion();
+                  console.log('Переход к форме контактов');
+                  setShowContactForm(true);
                 }}
                 disabled={!selectedGift}
                 size="lg"
