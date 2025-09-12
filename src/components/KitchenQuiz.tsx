@@ -219,16 +219,14 @@ ${answers.map((answer, index) =>
         })
       });
 
-      // Пока webhook не настроен, всегда возвращаем true
-      console.log('Данные заявки отправлены:', {
-        name: data.name,
-        phone: data.phone,
-        contactMethod: data.contactMethod,
-        answers: answers,
-        message: message
-      });
-      
-      return true;
+      if (response.ok) {
+        console.log('✅ Заявка успешно отправлена в Telegram @voodi_leads_bot');
+        return true;
+      } else {
+        const errorData = await response.text();
+        console.error('❌ Ошибка Telegram API:', errorData);
+        return false;
+      }
     } catch (error) {
       console.error('Ошибка отправки:', error);
       return false;
