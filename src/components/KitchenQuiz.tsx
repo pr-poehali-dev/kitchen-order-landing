@@ -212,15 +212,14 @@ ${answers.map((answer, index) =>
     `;
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      // Отправляем через Netlify Function для обхода CORS
+      const response = await fetch('/.netlify/functions/telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'Markdown'
+          message: message
         })
       });
 
