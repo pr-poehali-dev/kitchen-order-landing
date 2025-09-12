@@ -275,7 +275,7 @@ const KitchenQuiz = () => {
               </div>
             </div>
           </div>
-        )
+        )}
       </div>
     </section>
   );
