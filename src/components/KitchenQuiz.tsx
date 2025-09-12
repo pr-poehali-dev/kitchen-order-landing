@@ -193,7 +193,7 @@ const KitchenQuiz = () => {
   };
 
   const sendToTelegram = async (data: any) => {
-    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Замените на токен вашего бота
+    const TELEGRAM_BOT_TOKEN = '8224423916:AAFvsAaVCJvH5WD7_U2w26MIyb3ptODwuQk';
     const TELEGRAM_CHAT_ID = '800581249'; // Chat ID пользователя Oleg
     
     const message = `
