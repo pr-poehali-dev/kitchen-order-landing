@@ -12,6 +12,7 @@ const KitchenQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [selectedLayout, setSelectedLayout] = useState<string>('');
+  const [selectedStyle, setSelectedStyle] = useState<string>('');
 
   const layouts = [
     {
@@ -40,6 +41,33 @@ const KitchenQuiz = () => {
     }
   ];
 
+  const styles = [
+    {
+      id: 'modern',
+      name: 'Модерн',
+      description: 'Минимализм и чистые линии',
+      image: '/img/5b6121e2-dbcd-4706-a7f8-d52823005ca9.jpg'
+    },
+    {
+      id: 'scandinavian',
+      name: 'Скандинавия',
+      description: 'Уют и натуральные материалы',
+      image: '/img/c2204b69-8502-4eec-9140-d8960e38b115.jpg'
+    },
+    {
+      id: 'loft',
+      name: 'Лофт',
+      description: 'Индустриальный стиль',
+      image: '/img/c89ba1e8-728c-44f7-9f02-bb745ec872e7.jpg'
+    },
+    {
+      id: 'neoclassic',
+      name: 'Неоклассика',
+      description: 'Элегантность и традиции',
+      image: '/img/c6834518-8703-475d-a55d-63ee25622620.jpg'
+    }
+  ];
+
   const handleLayoutSelect = (layoutId: string) => {
     setSelectedLayout(layoutId);
     const newAnswer: QuizAnswer = {
@@ -51,10 +79,28 @@ const KitchenQuiz = () => {
     setAnswers(prev => [...prev.filter(a => a.question !== 1), newAnswer]);
   };
 
+  const handleStyleSelect = (styleId: string) => {
+    setSelectedStyle(styleId);
+    const newAnswer: QuizAnswer = {
+      question: 2,
+      answer: styleId,
+      value: styles.find(s => s.id === styleId)?.name
+    };
+    
+    setAnswers(prev => [...prev.filter(a => a.question !== 2), newAnswer]);
+  };
+
   const nextQuestion = () => {
-    if (selectedLayout) {
+    if (currentQuestion === 1 && selectedLayout) {
       setCurrentQuestion(2);
-      // Здесь будет логика для следующих вопросов
+    } else if (currentQuestion === 2 && selectedStyle) {
+      setCurrentQuestion(3);
+    }
+  };
+
+  const prevQuestion = () => {
+    if (currentQuestion > 1) {
+      setCurrentQuestion(currentQuestion - 1);
     }
   };
 
@@ -144,7 +190,71 @@ const KitchenQuiz = () => {
           </div>
         )}
 
-        {currentQuestion > 1 && (
+        {currentQuestion === 2 && (
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Вопрос 2 из 5: Выберите стиль кухни
+              </h3>
+              <p className="text-gray-600">
+                Какой стиль вам больше нравится?
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto">
+              {styles.map((style) => (
+                <Card
+                  key={style.id}
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                    selectedStyle === style.id
+                      ? 'ring-2 ring-orange-500 bg-orange-50'
+                      : 'hover:shadow-md'
+                  }`}
+                  onClick={() => handleStyleSelect(style.id)}
+                >
+                  <div className="p-3">
+                    <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
+                      <img
+                        src={style.image}
+                        alt={`Стиль ${style.name}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h4 className="font-semibold text-sm text-gray-800 mb-1 text-center">
+                      {style.name}
+                    </h4>
+                    {selectedStyle === style.id && (
+                      <div className="flex justify-center text-orange-600">
+                        <span className="text-xs font-medium">✓ Выбрано</span>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div className="flex justify-center space-x-4">
+              <Button
+                onClick={prevQuestion}
+                variant="outline"
+                size="lg"
+                className="px-8 py-3 text-lg"
+              >
+                ← Назад
+              </Button>
+              <Button
+                onClick={nextQuestion}
+                disabled={!selectedStyle}
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+              >
+                Следующий вопрос →
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {currentQuestion > 2 && (
           <div className="text-center">
             <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg p-8">
               <h3 className="text-xl font-semibold text-gray-800 mb-4">
@@ -153,9 +263,19 @@ const KitchenQuiz = () => {
               <p className="text-gray-600">
                 Ожидаем остальные вопросы квиза...
               </p>
+              <div className="flex justify-center mt-6">
+                <Button
+                  onClick={prevQuestion}
+                  variant="outline"
+                  size="lg"
+                  className="px-8 py-3 text-lg"
+                >
+                  ← Назад
+                </Button>
+              </div>
             </div>
           </div>
-        )}
+        )
       </div>
     </section>
   );
