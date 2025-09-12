@@ -484,7 +484,7 @@ const KitchenQuiz = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <div className="grid md:grid-cols-3 gap-3 mb-8 max-w-xl mx-auto">
               {[
                 { id: 'yes', name: 'Конечно да!', description: 'Получить замер и проект бесплатно', emoji: '✅' },
                 { id: 'no', name: 'Нет', description: 'Только расчет стоимости', emoji: '❌' },
@@ -492,7 +492,7 @@ const KitchenQuiz = () => {
               ].map((option) => (
                 <Card
                   key={option.id}
-                  className={`p-6 cursor-pointer transition-all border-2 ${
+                  className={`p-3 cursor-pointer transition-all border-2 ${
                     selectedGift === option.id
                       ? 'border-orange-500 bg-orange-50'
                       : 'border-gray-200 hover:border-orange-300'
@@ -500,9 +500,9 @@ const KitchenQuiz = () => {
                   onClick={() => handleGiftSelect(option.id)}
                 >
                   <div className="text-center">
-                    <div className="text-4xl mb-3">{option.emoji}</div>
-                    <h4 className="font-semibold text-gray-800 mb-2">{option.name}</h4>
-                    <p className="text-sm text-gray-600">{option.description}</p>
+                    <div className="text-2xl mb-2">{option.emoji}</div>
+                    <h4 className="font-semibold text-gray-800 mb-1 text-sm">{option.name}</h4>
+                    <p className="text-xs text-gray-600">{option.description}</p>
                     {selectedGift === option.id && (
                       <div className="mt-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs inline-flex items-center">
                         <span className="text-sm font-medium">✓ Выбрано</span>
