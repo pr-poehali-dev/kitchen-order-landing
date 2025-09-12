@@ -257,7 +257,7 @@ ${answers.map((answer, index) =>
     existingData.push(quizData);
     localStorage.setItem('kitchenQuizData', JSON.stringify(existingData));
     
-    // Формируем текст для копирования
+    // Формируем сообщение
     const message = `🎯 Новая заявка с квиза!
 
 👤 Имя: ${contactData.name}
@@ -271,14 +271,52 @@ ${answers.map((answer, index) =>
 
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
-    // Отправляем в Telegram автоматически
-    const success = await sendToTelegram(contactData);
+    // Создаем невидимую форму для отправки в Telegram
+    const form = document.createElement('form');
+    form.action = `https://api.telegram.org/bot7577409018:AAHL6dW7VZCm_-wimdHQyCdbKc8iA75M3RU/sendMessage`;
+    form.method = 'POST';
+    form.style.display = 'none';
     
-    if (success) {
-      alert('✅ Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-    } else {
-      alert('⚠️ Заявка сохранена локально. Возможны проблемы с отправкой в Telegram.');
-      console.log('📋 ДАННЫЕ ЗАЯВКИ:', message);
+    // Добавляем поля
+    const chatIdField = document.createElement('input');
+    chatIdField.name = 'chat_id';
+    chatIdField.value = '800581249';
+    form.appendChild(chatIdField);
+    
+    const textField = document.createElement('input');
+    textField.name = 'text';
+    textField.value = message;
+    form.appendChild(textField);
+    
+    // Отправляем форму
+    document.body.appendChild(form);
+    
+    try {
+      // Попытка отправки через fetch
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form)
+      });
+      
+      document.body.removeChild(form);
+      
+      if (response.ok) {
+        alert('✅ Спасибо! Заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.');
+      } else {
+        throw new Error('API Error');
+      }
+    } catch (error) {
+      document.body.removeChild(form);
+      
+      // Копируем в буфер обмена как запасной вариант
+      try {
+        await navigator.clipboard.writeText(message);
+        alert('✅ Заявка сохранена! Данные скопированы в буфер.\n\nОтправьте их боту @voodi_leads_bot в Telegram.');
+      } catch {
+        alert('✅ Заявка сохранена! Проверьте консоль браузера (F12) для копирования данных.');
+        console.log('📋 ЗАЯВКА ДЛЯ ОТПРАВКИ БОТУ @voodi_leads_bot:');
+        console.log(message);
+      }
     }
   };
 
