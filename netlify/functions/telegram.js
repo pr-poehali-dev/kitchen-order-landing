@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const TELEGRAM_BOT_TOKEN = '8224423916:AAFvsAaVCJvH5WD7_U2w26MIyb3ptODwuQk';
+  const TELEGRAM_BOT_TOKEN = '7996576501:AAE9tch9PGaAXSIbb60wsSr97e-HWEqo8nk';
   const TELEGRAM_CHAT_ID = '800581249';
 
   try {

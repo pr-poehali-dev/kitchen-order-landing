@@ -210,14 +210,13 @@ ${answers.map((answer, index) =>
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      const response = await fetch('/.netlify/functions/telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message
+          message: message
         })
       });
 
