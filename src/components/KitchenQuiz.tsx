@@ -111,29 +111,6 @@ const KitchenQuiz = () => {
     }
   ];
 
-  const lengthOptions = [
-    {
-      id: '2-3m',
-      name: 'от 2 до 3 метров',
-      description: 'Компактная кухня'
-    },
-    {
-      id: '3-5m',
-      name: 'от 3 до 5 метров',
-      description: 'Средняя кухня'
-    },
-    {
-      id: '5-7m',
-      name: 'от 5 до 7 метров',
-      description: 'Большая кухня'
-    },
-    {
-      id: '7m+',
-      name: '7+ метров',
-      description: 'Очень большая кухня'
-    }
-  ];
-
   const handleLayoutSelect = (layoutId: string) => {
     setSelectedLayout(layoutId);
     const newAnswer: QuizAnswer = {
