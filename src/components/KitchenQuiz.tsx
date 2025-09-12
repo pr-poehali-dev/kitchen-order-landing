@@ -207,17 +207,15 @@ ${answers.map((answer, index) =>
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
     try {
-      // Используем webhook.site для тестирования
-      const response = await fetch('https://webhook.site/unique-url-here', {
+      // Прямой запрос к Telegram API
+      const response = await fetch(`https://api.telegram.org/bot7577409018:AAHL6dW7VZCm_-wimdHQyCdbKc8iA75M3RU/sendMessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          bot_token: '7996576501:AAE9tch9PGaAXSIbb60wsSr97e-HWEqo8nk',
           chat_id: '800581249',
-          message: message,
-          timestamp: new Date().toISOString()
+          text: message
         })
       });
 
