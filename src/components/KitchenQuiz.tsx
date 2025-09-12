@@ -169,6 +169,8 @@ const KitchenQuiz = () => {
   };
 
   const nextQuestion = () => {
+    console.log('nextQuestion called:', { currentQuestion, selectedGift, showContactForm });
+    
     if (currentQuestion === 1 && selectedLayout) {
       setCurrentQuestion(2);
     } else if (currentQuestion === 2 && selectedStyle) {
@@ -178,6 +180,7 @@ const KitchenQuiz = () => {
     } else if (currentQuestion === 4 && selectedLength) {
       setCurrentQuestion(5);
     } else if (currentQuestion === 5 && selectedGift) {
+      console.log('Показываем форму контактов');
       setShowContactForm(true);
     }
   };
