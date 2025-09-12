@@ -99,13 +99,10 @@ export default function Index() {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
               <img 
-                src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
+                src="https://cdn.poehali.dev/files/ad67f314-e706-496e-a0f9-5e1cb83e64da.jpeg" 
                 alt="VOODI Logo" 
-                className="h-8 w-auto"
+                className="h-10 w-auto"
               />
-              <div className="text-2xl font-montserrat font-bold text-primary">
-                ВудиМебель
-              </div>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#portfolio" className="text-gray-700 hover:text-primary transition-colors">Портфолио</a>
