@@ -8,6 +8,12 @@ interface QuizAnswer {
   value?: any;
 }
 
+interface ContactData {
+  name: string;
+  phone: string;
+  contactMethod: 'phone' | 'whatsapp';
+}
+
 const KitchenQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
@@ -15,6 +21,13 @@ const KitchenQuiz = () => {
   const [selectedStyle, setSelectedStyle] = useState<string>('');
   const [selectedProject, setSelectedProject] = useState<string>('');
   const [selectedLength, setSelectedLength] = useState<string>('');
+  const [selectedGift, setSelectedGift] = useState<string>('');
+  const [showContactForm, setShowContactForm] = useState<boolean>(false);
+  const [contactData, setContactData] = useState({
+    name: '',
+    phone: '',
+    contactMethod: 'phone'
+  });
 
   const layouts = [
     {
@@ -164,7 +177,24 @@ const KitchenQuiz = () => {
       setCurrentQuestion(4);
     } else if (currentQuestion === 4 && selectedLength) {
       setCurrentQuestion(5);
+    } else if (currentQuestion === 5 && selectedGift) {
+      setShowContactForm(true);
     }
+  };
+
+  const handleGiftSelect = (giftId: string) => {
+    setSelectedGift(giftId);
+    const newAnswer: QuizAnswer = {
+      question: 5,
+      answer: giftId === 'yes' ? 'Конечно да' : giftId === 'no' ? 'Нет' : 'Не надо',
+      value: giftId
+    };
+    setAnswers([...answers.filter(a => a.question !== 5), newAnswer]);
+  };
+
+  const handleContactSubmit = () => {
+    console.log('Контактные данные:', contactData);
+    alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
   };
 
   const prevQuestion = () => {
@@ -443,26 +473,139 @@ const KitchenQuiz = () => {
           </div>
         )}
 
-        {currentQuestion > 4 && (
-          <div className="text-center">
-            <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg p-8">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                Вопрос {currentQuestion} из 5
+        {currentQuestion === 5 && !showContactForm && (
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Вопрос 5 из 5: За прохождение квиза дарим бесплатный замер + 3D проект
+              </h3>
+              <p className="text-lg text-gray-600 mb-8">
+                🎁 Закрепить подарок за вами?
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 mb-8">
+              {[
+                { id: 'yes', name: 'Конечно да!', description: 'Получить замер и проект бесплатно', emoji: '✅' },
+                { id: 'no', name: 'Нет', description: 'Только расчет стоимости', emoji: '❌' },
+                { id: 'later', name: 'Не надо', description: 'Передумал(а)', emoji: '🤔' }
+              ].map((option) => (
+                <Card
+                  key={option.id}
+                  className={`p-6 cursor-pointer transition-all border-2 ${
+                    selectedGift === option.id
+                      ? 'border-orange-500 bg-orange-50'
+                      : 'border-gray-200 hover:border-orange-300'
+                  }`}
+                  onClick={() => handleGiftSelect(option.id)}
+                >
+                  <div className="text-center">
+                    <div className="text-4xl mb-3">{option.emoji}</div>
+                    <h4 className="font-semibold text-gray-800 mb-2">{option.name}</h4>
+                    <p className="text-sm text-gray-600">{option.description}</p>
+                    {selectedGift === option.id && (
+                      <div className="mt-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs inline-flex items-center">
+                        <span className="text-sm font-medium">✓ Выбрано</span>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div className="flex justify-center space-x-4">
+              <Button
+                onClick={prevQuestion}
+                variant="outline"
+                size="lg"
+                className="px-8 py-3 text-lg"
+              >
+                ← Назад
+              </Button>
+              <Button
+                onClick={nextQuestion}
+                disabled={!selectedGift}
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+              >
+                Получить расчет →
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {showContactForm && (
+          <div className="max-w-md mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                🎉 Отлично! Оставьте контакты
               </h3>
               <p className="text-gray-600">
-                Ожидаем остальные вопросы квиза...
+                Мы свяжемся с вами для уточнения деталей и предоставления расчета
               </p>
-              <div className="flex justify-center mt-6">
+            </div>
+
+            <Card className="p-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Ваше имя
+                  </label>
+                  <input
+                    type="text"
+                    value={contactData.name}
+                    onChange={(e) => setContactData(prev => ({ ...prev, name: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    placeholder="Введите ваше имя"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Номер телефона
+                  </label>
+                  <input
+                    type="tel"
+                    value={contactData.phone}
+                    onChange={(e) => setContactData(prev => ({ ...prev, phone: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    placeholder="+7 (999) 123-45-67"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Способ связи
+                  </label>
+                  <div className="flex space-x-2">
+                    <Button
+                      type="button"
+                      variant={contactData.contactMethod === 'phone' ? 'default' : 'outline'}
+                      onClick={() => setContactData(prev => ({ ...prev, contactMethod: 'phone' }))}
+                      className="flex-1"
+                    >
+                      📞 Телефон
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={contactData.contactMethod === 'whatsapp' ? 'default' : 'outline'}
+                      onClick={() => setContactData(prev => ({ ...prev, contactMethod: 'whatsapp' }))}
+                      className="flex-1"
+                    >
+                      💬 WhatsApp
+                    </Button>
+                  </div>
+                </div>
+
                 <Button
-                  onClick={prevQuestion}
-                  variant="outline"
-                  size="lg"
-                  className="px-8 py-3 text-lg"
+                  onClick={handleContactSubmit}
+                  disabled={!contactData.name || !contactData.phone}
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg"
                 >
-                  ← Назад
+                  Получить расчет и подарок 🎁
                 </Button>
               </div>
-            </div>
+            </Card>
           </div>
         )}
       </div>
