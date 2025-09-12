@@ -193,45 +193,27 @@ const KitchenQuiz = () => {
   };
 
   const sendToTelegram = async (data: any) => {
-    const TELEGRAM_BOT_TOKEN = '8224423916:AAFvsAaVCJvH5WD7_U2w26MIyb3ptODwuQk';
-    const TELEGRAM_CHAT_ID = '800581249'; // Chat ID пользователя Oleg
-    
-    const message = `
-🎯 *Новая заявка с квиза!*
+    // Формируем сообщение для отправки
+    const message = `🎯 Новая заявка с квиза!
 
-👤 *Имя:* ${data.name}
-📱 *Телефон:* ${data.phone}
-📞 *Способ связи:* ${data.contactMethod === 'phone' ? 'Телефон' : 'WhatsApp'}
+👤 Имя: ${data.name}
+📱 Телефон: ${data.phone}
+📞 Способ связи: ${data.contactMethod === 'phone' ? 'Телефон' : 'WhatsApp'}
 
-📋 *Ответы квиза:*
+📋 Ответы квиза:
 ${answers.map((answer, index) => 
   `${index + 1}. ${getQuestionText(answer.question)}: ${answer.answer}`
 ).join('\n')}
 
-📅 *Дата:* ${new Date().toLocaleString('ru-RU')}
-    `;
+📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
-    try {
-      // Отправляем через Netlify Function для обхода CORS
-      const response = await fetch('/.netlify/functions/telegram', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: message
-        })
-      });
-
-      if (response.ok) {
-        return true;
-      } else {
-        throw new Error('Ошибка отправки в Telegram');
-      }
-    } catch (error) {
-      console.error('Ошибка отправки в Telegram:', error);
-      return false;
-    }
+    // Создаем ссылку для отправки в Telegram
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.origin)}&text=${encodeURIComponent(message)}`;
+    
+    // Открываем Telegram для отправки
+    window.open(telegramUrl, '_blank');
+    
+    return true;
   };
 
   const getQuestionText = (questionNumber: number): string => {
@@ -246,13 +228,43 @@ ${answers.map((answer, index) =>
   };
 
   const handleContactSubmit = async () => {
-    const success = await sendToTelegram(contactData);
+    // Сохраняем заявку локально
+    const quizData = {
+      timestamp: new Date().toISOString(),
+      contact: contactData,
+      answers: answers
+    };
     
-    if (success) {
-      alert('✅ Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-    } else {
-      alert('⚠️ Произошла ошибка при отправке. Попробуйте позвонить нам напрямую.');
+    // Сохраняем в localStorage
+    const existingData = JSON.parse(localStorage.getItem('kitchenQuizData') || '[]');
+    existingData.push(quizData);
+    localStorage.setItem('kitchenQuizData', JSON.stringify(existingData));
+    
+    // Формируем текст для копирования
+    const message = `🎯 Новая заявка с квиза!
+
+👤 Имя: ${contactData.name}
+📱 Телефон: ${contactData.phone}
+📞 Способ связи: ${contactData.contactMethod === 'phone' ? 'Телефон' : 'WhatsApp'}
+
+📋 Ответы квиза:
+${answers.map((answer, index) => 
+  `${index + 1}. ${getQuestionText(answer.question)}: ${answer.answer}`
+).join('\n')}
+
+📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
+
+    // Копируем в буфер обмена
+    try {
+      await navigator.clipboard.writeText(message);
+      alert('✅ Заявка сохранена! Данные скопированы в буфер обмена.\n\nВы можете вставить их в Telegram боту: @Black_Oleg');
+    } catch (error) {
+      alert('✅ Заявка сохранена! Скопируйте данные из консоли браузера (F12).');
+      console.log('📋 ДАННЫЕ ЗАЯВКИ ДЛЯ КОПИРОВАНИЯ:');
+      console.log(message);
     }
+    
+    await sendToTelegram(contactData);
   };
 
   const prevQuestion = () => {
