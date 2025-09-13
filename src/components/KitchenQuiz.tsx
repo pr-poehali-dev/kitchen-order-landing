@@ -727,12 +727,15 @@ ${answers.map((answer, index) =>
                   </div>
                 </div>
 
+                <div className="text-xs text-gray-500 mb-2">
+                  Debug: name="{contactData.name}", phone="{contactData.phone}"
+                </div>
                 <Button
                   onClick={handleContactSubmit}
                   disabled={!contactData.name || !contactData.phone}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg"
                 >
-                  Получить расчет →
+                  Получить расчет и подарок 🎁
                 </Button>
               </div>
             </Card>
