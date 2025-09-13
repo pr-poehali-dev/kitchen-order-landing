@@ -296,7 +296,7 @@ ${answers.map((answer, index) =>
       // Способ 2: Через webhook (если первый не сработал)
       if (!telegramSent) {
         try {
-          const webhookUrl = 'https://hook.eu1.make.com/YOUR_WEBHOOK_ID'; // Заменить на реальный webhook
+          const webhookUrl = 'https://hook.eu1.make.com/ВАШ_WEBHOOK_ID'; // Замените на URL из Make.com
           const response = await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
