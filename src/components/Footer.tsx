@@ -54,16 +54,29 @@ export default function Footer() {
 
       {/* Footer */}
       <footer className="bg-black text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <img 
-              src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
-              alt="VOODI Logo" 
-              className="h-8 w-auto"
-            />
-            <div className="text-2xl font-montserrat font-bold text-primary">КУХНИ НА ЗАКАЗ</div>
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <img 
+                src="https://cdn.poehali.dev/files/bd995261-e053-426f-8067-527df733980c.jpeg" 
+                alt="VOODI Logo" 
+                className="h-8 w-auto"
+              />
+              <div className="text-2xl font-montserrat font-bold text-primary">КУХНИ НА ЗАКАЗ</div>
+            </div>
           </div>
-          <p className="text-gray-400">© 2024 Все права защищены</p>
+          
+          {/* Legal Links */}
+          <div className="flex justify-center space-x-6 mb-4 text-sm">
+            <a href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+              Политика конфиденциальности
+            </a>
+            <a href="/terms" className="text-gray-400 hover:text-white transition-colors">
+              Пользовательское соглашение
+            </a>
+          </div>
+          
+          <p className="text-gray-400 text-center">© 2024 Все права защищены</p>
         </div>
       </footer>
     </>
