@@ -299,40 +299,43 @@ ${answers.map((answer, index) =>
     textField.value = message;
     form.appendChild(textField);
     
-    // Отправляем форму
-    document.body.appendChild(form);
-    
-    try {
-      // Попытка отправки через fetch
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form)
-      });
+      // Отправляем форму
+      document.body.appendChild(form);
       
-      document.body.removeChild(form);
-      
-      if (response.ok) {
-        alert('✅ Спасибо! Заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.');
-      } else {
-        throw new Error('API Error');
+      try {
+        // Попытка отправки через fetch
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        
+        document.body.removeChild(form);
+        
+        if (response.ok) {
+          alert('✅ Спасибо! Заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.');
+        } else {
+          throw new Error('API Error');
+        }
+      } catch (innerError) {
+        console.error('❌ Ошибка в handleContactSubmit:', innerError);
+        
+        if (form && document.body.contains(form)) {
+          document.body.removeChild(form);
+        }
+        
+        // Копируем в буфер обмена как запасной вариант
+        try {
+          await navigator.clipboard.writeText(message);
+          alert('✅ Заявка сохранена! Данные скопированы в буфер.\n\nОтправьте их боту @voodi_leads_bot в Telegram.');
+        } catch {
+          alert('✅ Заявка сохранена! Проверьте консоль браузера (F12) для копирования данных.');
+          console.log('📋 ЗАЯВКА ДЛЯ ОТПРАВКИ БОТУ @voodi_leads_bot:');
+          console.log(message);
+        }
       }
     } catch (error) {
-      console.error('❌ Ошибка в handleContactSubmit:', error);
-      alert('❌ Ошибка: ' + error.message);
-      
-      if (form && document.body.contains(form)) {
-        document.body.removeChild(form);
-      }
-      
-      // Копируем в буфер обмена как запасной вариант
-      try {
-        await navigator.clipboard.writeText(message);
-        alert('✅ Заявка сохранена! Данные скопированы в буфер.\n\nОтправьте их боту @voodi_leads_bot в Telegram.');
-      } catch {
-        alert('✅ Заявка сохранена! Проверьте консоль браузера (F12) для копирования данных.');
-        console.log('📋 ЗАЯВКА ДЛЯ ОТПРАВКИ БОТУ @voodi_leads_bot:');
-        console.log(message);
-      }
+      console.error('❌ Общая ошибка:', error);
+      alert('❌ Произошла ошибка при обработке заявки');
     }
   };
 
