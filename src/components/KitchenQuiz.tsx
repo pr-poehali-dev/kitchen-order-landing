@@ -248,14 +248,20 @@ ${answers.map((answer, index) =>
   };
 
   const handleContactSubmit = async () => {
-    alert('🔍 Функция handleContactSubmit вызвана!');
-    
-    // Сохраняем заявку локально
-    const quizData = {
-      timestamp: new Date().toISOString(),
-      contact: contactData,
-      answers: answers
-    };
+    try {
+      alert('🔍 Функция handleContactSubmit вызвана!');
+      
+      console.log('contactData:', contactData);
+      console.log('answers:', answers);
+      
+      // Сохраняем заявку локально
+      const quizData = {
+        timestamp: new Date().toISOString(),
+        contact: contactData,
+        answers: answers
+      };
+      
+      alert('✅ Данные подготовлены');
     
     // Сохраняем в localStorage
     const existingData = JSON.parse(localStorage.getItem('kitchenQuizData') || '[]');
@@ -311,7 +317,12 @@ ${answers.map((answer, index) =>
         throw new Error('API Error');
       }
     } catch (error) {
-      document.body.removeChild(form);
+      console.error('❌ Ошибка в handleContactSubmit:', error);
+      alert('❌ Ошибка: ' + error.message);
+      
+      if (form && document.body.contains(form)) {
+        document.body.removeChild(form);
+      }
       
       // Копируем в буфер обмена как запасной вариант
       try {
@@ -323,6 +334,7 @@ ${answers.map((answer, index) =>
         console.log(message);
       }
     }
+  };
   };
 
   const prevQuestion = () => {
