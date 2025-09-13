@@ -652,7 +652,8 @@ ${answers.map((answer, index) =>
               </Button>
               <Button
                 onClick={() => {
-                  console.log('Переход к форме контактов');
+                  console.log('Кнопка нажата! Переход к форме');
+                  alert('Кнопка работает!');
                   setShowContactForm(true);
                 }}
                 size="default"
