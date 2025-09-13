@@ -275,16 +275,57 @@ ${answers.map((answer, index) =>
 
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
-      // Telegram API не работает напрямую из браузера из-за CORS
-      // Поэтому используем резервный способ - копируем в буфер
+      // Пробуем несколько способов отправки в Telegram
+      let telegramSent = false;
+      
+      // Способ 1: Через allorigins.win прокси
       try {
-        await navigator.clipboard.writeText(message);
-        alert('✅ Заявка сохранена и скопирована в буфер обмена!\n\n📋 Данные скопированы - отправьте их боту @voodi_leads_bot в Telegram или свяжитесь с нами любым удобным способом.');
-      } catch {
-        // Если не удалось скопировать в буфер, показываем в консоли
-        console.log('📋 ДАННЫЕ ЗАЯВКИ ДЛЯ ОТПРАВКИ:');
-        console.log(message);
-        alert('✅ Заявка сохранена!\n\n📋 Данные выведены в консоль браузера (F12). Скопируйте их и отправьте боту @voodi_leads_bot в Telegram.');
+        const telegramUrl = `https://api.telegram.org/bot7577409018:AAHL6dW7VZCm_-wimdHQyCdbKc8iA75M3RU/sendMessage`;
+        const encodedMessage = encodeURIComponent(message);
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(telegramUrl + `?chat_id=800581249&text=${encodedMessage}`)}`;
+        
+        const response = await fetch(proxyUrl);
+        if (response.ok) {
+          telegramSent = true;
+          alert('✅ Заявка успешно отправлена в Telegram! Мы свяжемся с вами в ближайшее время.');
+        }
+      } catch (error) {
+        console.log('Способ 1 не сработал:', error);
+      }
+      
+      // Способ 2: Через webhook (если первый не сработал)
+      if (!telegramSent) {
+        try {
+          const webhookUrl = 'https://hook.eu1.make.com/YOUR_WEBHOOK_ID'; // Заменить на реальный webhook
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: message,
+              contact: contactData,
+              answers: answers
+            })
+          });
+          
+          if (response.ok) {
+            telegramSent = true;
+            alert('✅ Заявка отправлена через webhook! Мы свяжемся с вами в ближайшее время.');
+          }
+        } catch (error) {
+          console.log('Webhook тоже не сработал:', error);
+        }
+      }
+      
+      // Резервный способ - копируем в буфер
+      if (!telegramSent) {
+        try {
+          await navigator.clipboard.writeText(message);
+          alert('⚠️ Автоматическая отправка временно недоступна.\n\n✅ Данные скопированы в буфер! Отправьте их боту @voodi_leads_bot в Telegram.');
+        } catch {
+          console.log('📋 ДАННЫЕ ЗАЯВКИ:');
+          console.log(message);
+          alert('⚠️ Заявка сохранена локально! Данные в консоли (F12).\n\n📋 Отправьте их боту @voodi_leads_bot в Telegram.');
+        }
       }
     } catch (error) {
       console.error('❌ Общая ошибка:', error);
