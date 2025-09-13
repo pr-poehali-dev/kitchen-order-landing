@@ -639,11 +639,7 @@ ${answers.map((answer, index) =>
               ))}
             </div>
 
-            <div className="text-center mb-4">
-              <div className="text-sm text-gray-600 mb-2">
-                Debug: selectedGift = "{selectedGift}" (кнопка {selectedGift ? 'активна' : 'заблокирована'})
-              </div>
-            </div>
+
 
             <div className="flex justify-center space-x-4">
               <Button
