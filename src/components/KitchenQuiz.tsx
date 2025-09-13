@@ -262,11 +262,11 @@ ${answers.map((answer, index) =>
       };
       
       alert('✅ Данные подготовлены');
-    
-    // Сохраняем в localStorage
-    const existingData = JSON.parse(localStorage.getItem('kitchenQuizData') || '[]');
-    existingData.push(quizData);
-    localStorage.setItem('kitchenQuizData', JSON.stringify(existingData));
+      
+      // Сохраняем в localStorage
+      const existingData = JSON.parse(localStorage.getItem('kitchenQuizData') || '[]');
+      existingData.push(quizData);
+      localStorage.setItem('kitchenQuizData', JSON.stringify(existingData));
     
     // Формируем сообщение
     const message = `🎯 Новая заявка с квиза!
