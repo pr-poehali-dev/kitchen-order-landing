@@ -732,7 +732,6 @@ ${answers.map((answer, index) =>
                 </div>
                 <Button
                   onClick={handleContactSubmit}
-                  disabled={!contactData.name || !contactData.phone}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg"
                 >
                   Получить расчет и подарок 🎁
