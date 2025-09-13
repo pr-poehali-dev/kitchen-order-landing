@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { reachGoal } from './YandexMetrica';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -309,6 +310,7 @@ ${answers.map((answer, index) =>
           
           if (response.ok) {
             telegramSent = true;
+            reachGoal('quiz_submitted', { answers: answers.length, contact_method: contactData.contactMethod });
             alert('Спасибо, с вами свяжутся в ближайшее время!');
           }
         } catch (error) {

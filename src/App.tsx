@@ -9,6 +9,7 @@ import QuizTestPage from "./components/QuizTestPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookieBanner from "./components/CookieBanner";
+import YandexMetrica from "./components/YandexMetrica";
 
 const App = () => (
   <TooltipProvider>
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="*" element={<NotFound />} />
       </Routes>
       <CookieBanner />
+      <YandexMetrica id="ЗАМЕНИТЕ_НА_ВАШ_ID" />
     </BrowserRouter>
   </TooltipProvider>
 );
