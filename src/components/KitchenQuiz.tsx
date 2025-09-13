@@ -275,51 +275,16 @@ ${answers.map((answer, index) =>
 
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
 
-    // Создаем невидимую форму для отправки в Telegram
-    const form = document.createElement('form');
-    form.action = `https://api.telegram.org/bot7577409018:AAHL6dW7VZCm_-wimdHQyCdbKc8iA75M3RU/sendMessage`;
-    form.method = 'POST';
-    form.style.display = 'none';
-    
-    // Добавляем поля
-    const chatIdField = document.createElement('input');
-    chatIdField.name = 'chat_id';
-    chatIdField.value = '800581249';
-    form.appendChild(chatIdField);
-    
-    const textField = document.createElement('input');
-    textField.name = 'text';
-    textField.value = message;
-    form.appendChild(textField);
-    
-      // Отправляем через iframe для обхода CORS
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.name = 'telegram-frame';
-      document.body.appendChild(iframe);
-      
-      form.target = 'telegram-frame';
-      document.body.appendChild(form);
-      
-      // Отправляем форму
-      form.submit();
-      
-      // Ждем и убираем элементы
-      setTimeout(() => {
-        if (document.body.contains(form)) {
-          document.body.removeChild(form);
-        }
-        if (document.body.contains(iframe)) {
-          document.body.removeChild(iframe);
-        }
-      }, 2000);
-      
-      // Копируем в буфер как дополнительная мера
+      // Telegram API не работает напрямую из браузера из-за CORS
+      // Поэтому используем резервный способ - копируем в буфер
       try {
         await navigator.clipboard.writeText(message);
-        alert('✅ Заявка отправлена! Данные также скопированы в буфер для подтверждения.\n\nПри необходимости отправьте их боту @voodi_leads_bot в Telegram.');
+        alert('✅ Заявка сохранена и скопирована в буфер обмена!\n\n📋 Данные скопированы - отправьте их боту @voodi_leads_bot в Telegram или свяжитесь с нами любым удобным способом.');
       } catch {
-        alert('✅ Заявка отправлена в Telegram! Мы свяжемся с вами в ближайшее время.');
+        // Если не удалось скопировать в буфер, показываем в консоли
+        console.log('📋 ДАННЫЕ ЗАЯВКИ ДЛЯ ОТПРАВКИ:');
+        console.log(message);
+        alert('✅ Заявка сохранена!\n\n📋 Данные выведены в консоль браузера (F12). Скопируйте их и отправьте боту @voodi_leads_bot в Telegram.');
       }
     } catch (error) {
       console.error('❌ Общая ошибка:', error);
