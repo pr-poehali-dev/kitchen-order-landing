@@ -249,19 +249,12 @@ ${answers.map((answer, index) =>
 
   const handleContactSubmit = async () => {
     try {
-      alert('🔍 Функция handleContactSubmit вызвана!');
-      
-      console.log('contactData:', contactData);
-      console.log('answers:', answers);
-      
       // Сохраняем заявку локально
       const quizData = {
         timestamp: new Date().toISOString(),
         contact: contactData,
         answers: answers
       };
-      
-      alert('✅ Данные подготовлены');
       
       // Сохраняем в localStorage
       const existingData = JSON.parse(localStorage.getItem('kitchenQuizData') || '[]');
