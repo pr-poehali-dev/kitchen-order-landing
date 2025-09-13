@@ -248,6 +248,8 @@ ${answers.map((answer, index) =>
   };
 
   const handleContactSubmit = async () => {
+    alert('🔍 Функция handleContactSubmit вызвана!');
+    
     // Сохраняем заявку локально
     const quizData = {
       timestamp: new Date().toISOString(),
