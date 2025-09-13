@@ -287,7 +287,7 @@ ${answers.map((answer, index) =>
         const response = await fetch(proxyUrl);
         if (response.ok) {
           telegramSent = true;
-          alert('✅ Заявка успешно отправлена в Telegram! Мы свяжемся с вами в ближайшее время.');
+          alert('Спасибо, с вами свяжутся в ближайшее время!');
         }
       } catch (error) {
         console.log('Способ 1 не сработал:', error);
@@ -309,7 +309,7 @@ ${answers.map((answer, index) =>
           
           if (response.ok) {
             telegramSent = true;
-            alert('✅ Заявка успешно отправлена через Albato! Мы свяжемся с вами в ближайшее время.');
+            alert('Спасибо, с вами свяжутся в ближайшее время!');
           }
         } catch (error) {
           console.log('Webhook тоже не сработал:', error);
