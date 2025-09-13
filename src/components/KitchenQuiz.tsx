@@ -653,13 +653,12 @@ ${answers.map((answer, index) =>
               <Button
                 onClick={() => {
                   console.log('Кнопка нажата! Переход к форме');
-                  alert('Кнопка работает!');
                   setShowContactForm(true);
                 }}
                 size="default"
                 className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-base"
               >
-                Получить расчет →
+                Получить расчет и подарок 🎁
               </Button>
             </div>
           </div>
