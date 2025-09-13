@@ -658,7 +658,7 @@ ${answers.map((answer, index) =>
                 size="default"
                 className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-base"
               >
-                Получить расчет и подарок 🎁
+                Получить расчет →
               </Button>
             </div>
           </div>
@@ -732,7 +732,7 @@ ${answers.map((answer, index) =>
                   disabled={!contactData.name || !contactData.phone}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg"
                 >
-                  Получить расчет и подарок 🎁
+                  Получить расчет →
                 </Button>
               </div>
             </Card>
