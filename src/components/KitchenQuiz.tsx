@@ -296,7 +296,7 @@ ${answers.map((answer, index) =>
       // Способ 2: Через webhook (если первый не сработал)
       if (!telegramSent) {
         try {
-          const webhookUrl = 'https://hook.eu1.make.com/ВАШ_WEBHOOK_ID'; // Замените на URL из Make.com
+          const webhookUrl = 'https://h.albato.ru/wh/38/1lfauph/0d4-3tjvvDTSThtPZQEsLdnTHVv64_mDp8L-j3lF540/';
           const response = await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -309,7 +309,7 @@ ${answers.map((answer, index) =>
           
           if (response.ok) {
             telegramSent = true;
-            alert('✅ Заявка отправлена через webhook! Мы свяжемся с вами в ближайшее время.');
+            alert('✅ Заявка успешно отправлена через Albato! Мы свяжемся с вами в ближайшее время.');
           }
         } catch (error) {
           console.log('Webhook тоже не сработал:', error);
