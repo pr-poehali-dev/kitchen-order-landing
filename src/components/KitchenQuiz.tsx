@@ -335,7 +335,6 @@ ${answers.map((answer, index) =>
       }
     }
   };
-  };
 
   const prevQuestion = () => {
     if (currentQuestion > 1) {
