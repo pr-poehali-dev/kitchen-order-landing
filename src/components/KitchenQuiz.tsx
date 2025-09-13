@@ -418,8 +418,8 @@ ${answers.map((answer, index) =>
               <Button
                 onClick={nextQuestion}
                 disabled={!selectedLayout}
-                size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+                size="default"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-base"
               >
                 Следующий вопрос →
               </Button>
@@ -474,16 +474,16 @@ ${answers.map((answer, index) =>
               <Button
                 onClick={prevQuestion}
                 variant="outline"
-                size="lg"
-                className="px-8 py-3 text-lg"
+                size="default"
+                className="px-4 py-2 text-base"
               >
                 ← Назад
               </Button>
               <Button
                 onClick={nextQuestion}
                 disabled={!selectedStyle}
-                size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+                size="default"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-base"
               >
                 Следующий вопрос →
               </Button>
@@ -534,16 +534,16 @@ ${answers.map((answer, index) =>
               <Button
                 onClick={prevQuestion}
                 variant="outline"
-                size="lg"
-                className="px-8 py-3 text-lg"
+                size="default"
+                className="px-4 py-2 text-base"
               >
                 ← Назад
               </Button>
               <Button
                 onClick={nextQuestion}
                 disabled={!selectedProject}
-                size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+                size="default"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-base"
               >
                 Следующий вопрос →
               </Button>
@@ -594,16 +594,16 @@ ${answers.map((answer, index) =>
               <Button
                 onClick={prevQuestion}
                 variant="outline"
-                size="lg"
-                className="px-8 py-3 text-lg"
+                size="default"
+                className="px-4 py-2 text-base"
               >
                 ← Назад
               </Button>
               <Button
                 onClick={nextQuestion}
                 disabled={!selectedLength}
-                size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+                size="default"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 text-base"
               >
                 Следующий вопрос →
               </Button>
