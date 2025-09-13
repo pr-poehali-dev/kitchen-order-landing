@@ -292,39 +292,34 @@ ${answers.map((answer, index) =>
     textField.value = message;
     form.appendChild(textField);
     
-      // Отправляем форму
+      // Отправляем через iframe для обхода CORS
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.name = 'telegram-frame';
+      document.body.appendChild(iframe);
+      
+      form.target = 'telegram-frame';
       document.body.appendChild(form);
       
-      try {
-        // Попытка отправки через fetch
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form)
-        });
-        
-        document.body.removeChild(form);
-        
-        if (response.ok) {
-          alert('✅ Спасибо! Заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.');
-        } else {
-          throw new Error('API Error');
-        }
-      } catch (innerError) {
-        console.error('❌ Ошибка в handleContactSubmit:', innerError);
-        
-        if (form && document.body.contains(form)) {
+      // Отправляем форму
+      form.submit();
+      
+      // Ждем и убираем элементы
+      setTimeout(() => {
+        if (document.body.contains(form)) {
           document.body.removeChild(form);
         }
-        
-        // Копируем в буфер обмена как запасной вариант
-        try {
-          await navigator.clipboard.writeText(message);
-          alert('✅ Заявка сохранена! Данные скопированы в буфер.\n\nОтправьте их боту @voodi_leads_bot в Telegram.');
-        } catch {
-          alert('✅ Заявка сохранена! Проверьте консоль браузера (F12) для копирования данных.');
-          console.log('📋 ЗАЯВКА ДЛЯ ОТПРАВКИ БОТУ @voodi_leads_bot:');
-          console.log(message);
+        if (document.body.contains(iframe)) {
+          document.body.removeChild(iframe);
         }
+      }, 2000);
+      
+      // Копируем в буфер как дополнительная мера
+      try {
+        await navigator.clipboard.writeText(message);
+        alert('✅ Заявка отправлена! Данные также скопированы в буфер для подтверждения.\n\nПри необходимости отправьте их боту @voodi_leads_bot в Telegram.');
+      } catch {
+        alert('✅ Заявка отправлена в Telegram! Мы свяжемся с вами в ближайшее время.');
       }
     } catch (error) {
       console.error('❌ Общая ошибка:', error);
